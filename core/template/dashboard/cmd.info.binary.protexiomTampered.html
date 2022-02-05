@@ -1,0 +1,17 @@
+<div style="width:62px;min-height:62px;" class="cmd #history# tooltips cmd-widget" data-type="info" data-subtype="binary" data-cmd_id="#id#" title="#collectDate#">
+    <center>
+        <span style="font-weight: 400;font-size : 12px;" class='cmdName'>#name#<br/></span>
+        <span style="font-size: 2em;margin-top: 5px;" class="iconCmd#id#"></span>
+    </center>
+
+    <script>
+        if ('#state#' == '1' || '#state#' == 1) {
+            $('.iconCmd#id#').addClass('fas fa-cube');
+            $('.cmd[data-cmd_id=#id#]').attr('title', 'OK  -  #collectDate#');
+        }
+        if ('#state#' == '0' || '#state#' == 0) {
+            $('.iconCmd#id#').addClass('fab fa-dropbox text-danger');
+            $('.cmd[data-cmd_id=#id#]').attr('title', 'Alarme sabotage  -  #collectDate#');
+        }
+    </script>
+</div>

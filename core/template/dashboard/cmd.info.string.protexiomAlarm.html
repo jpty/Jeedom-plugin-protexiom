@@ -1,0 +1,31 @@
+<div style="width:90px;min-height:62px;" class="cmd #history# tooltips cmd-widget" data-type="info" data-subtype="string" data-cmd_id="#id#" title="#collectDate#">
+  <center>
+    <span style="font-weight: 400;font-size : 12px;" class='cmdName'>#name#<br/></span>
+    <span class="fa-stack fa-2x">
+      <i class="iconCmd#id#"></i>
+      <i class="icon2Cmd#id#"></i>
+      <i class="icon3Cmd#id#"></i>
+    </span>
+  </center>
+
+  <script>
+    if ('#state#' == 'ok') {
+      $('.iconCmd#id#').addClass('fas fa-home fa-2x fa-stack-1x')
+      $('.icon2Cmd#id#').addClass('fas fa-check text-success fa-1x fa-stack-1x pull-right');
+      $('.cmd[data-cmd_id=#id#]').attr('title', 'Pas d\'alarme  -  #collectDate#');
+    }
+    if ('#state#' == 'nok_int') {
+      $('.iconCmd#id#').addClass('fas fa-home fa-2x fa-stack-1x');
+      $('.icon2Cmd#id#').addClass('fas icon jeedom-mouvement text-danger fa-2x fa-stack-2x');
+      $('.cmd[data-cmd_id=#id#]').attr('title', 'Alarme Intrusion  -  #collectDate#');
+    }
+    if ('#state#' == 'nok_dom') {
+      $('.iconCmd#id#').addClass('fas fa-home fa-2x fa-stack-1x');
+      $('.icon2Cmd#id#').addClass('fas fa-fire  fa-stack-1x pull-right');
+      $('.icon2Cmd#id#').css({ "color": "#ff8000" });
+      $('.icon3Cmd#id#').addClass('fas nature-drops1 fa-stack-1x');
+      $('.icon3Cmd#id#').css({ "color": "#1b7ae4" });
+      $('.cmd[data-cmd_id=#id#]').attr('title', 'Alarme domestique  -  #collectDate#');
+    }
+  </script>
+</div>

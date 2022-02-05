@@ -1,0 +1,57 @@
+<div class="eqLogic eqLogic-widget noResize" style="vertical-align:middle;display:inline-block;line-height:normal;text-align:center;background-color: #background-color#" data-eqLogic_id="#id#" data-version="mobile" data-category="#category#">
+    <span class="statusCmd" style="position : absolute;left : 5px; width : 30px;"></span>
+    <span class="statusBattery" style="position : absolute;right : 5px; width : 30px;"></span>
+    <center>
+        <span class="widget-name">
+            <span style="font-weight: bold;">#name#</span><br/>
+        </span>
+    </center>
+    <hr style="margin-bottom:8px;border: 0;height: 1px;background-image:-webkit-linear-gradient(left,rgba(255,255,255,0),rgba(255,255,255,0.75),rgba(255,255,255,0));background-image:-moz-linear-gradient(left,rgba(255,255,255,0),rgba(255,255,255,0.75),rgba(255,255,255,0));background-image:-ms-linear-gradient(left,rgba(255,255,255,0),rgba(255,255,255,0.75),rgba(255,255,255,0));background-image:-o-linear-gradient(left, rgba(255,255,255,0), rgba(255,255,255,0.75), rgba(255,255,255,0));}">
+    <div style="vertical-align:middle;display:inline-block;line-height:normal;text-align:center;">
+		#link#
+		#door#
+		#tampered#
+		#camera#
+		#gsm_signal#
+		#battery_status#
+		<br>
+		#gsm_link#
+		#gsm_operator#
+    </div>
+    <hr style="margin-bottom:8px;border: 0;height: 1px;background-image:-webkit-linear-gradient(left,rgba(255,255,255,0),rgba(255,255,255,0.75),rgba(255,255,255,0));background-image:-moz-linear-gradient(left,rgba(255,255,255,0),rgba(255,255,255,0.75),rgba(255,255,255,0));background-image:-ms-linear-gradient(left,rgba(255,255,255,0),rgba(255,255,255,0.75),rgba(255,255,255,0));background-image:-o-linear-gradient(left, rgba(255,255,255,0), rgba(255,255,255,0.75), rgba(255,255,255,0));}">
+    <div style="display:inline-block;line-height:normal;text-align:center;">
+		<div style="display:inline-block;line-height:normal;text-align:center;">
+			#alarm#
+			#zone_a#
+			#zone_b#
+			#zone_c#
+		</div>
+		<br>
+
+            	#zoneabc_on#
+            	#zoneabc_off#
+            	<br>
+            	#zonea_on#
+            	#zoneb_on#
+            	#zonec_on#
+    </div>
+    <hr style="margin-bottom:8px;border: 0;height: 1px;background-image:-webkit-linear-gradient(left,rgba(255,255,255,0),rgba(255,255,255,0.75),rgba(255,255,255,0));background-image:-moz-linear-gradient(left,rgba(255,255,255,0),rgba(255,255,255,0.75),rgba(255,255,255,0));background-image:-ms-linear-gradient(left,rgba(255,255,255,0),rgba(255,255,255,0.75),rgba(255,255,255,0));background-image:-o-linear-gradient(left, rgba(255,255,255,0), rgba(255,255,255,0.75), rgba(255,255,255,0));}">
+    <div style="display:inline-block;line-height:normal;text-align:center;">
+            	#reset_alarm_err#
+            	#reset_battery_err#
+            	#reset_link_err#
+    </div>
+</div>
+<script>
+    if(!isNaN('#battery#') && parseInt('#battery#') >= 0){
+        if(parseInt('#battery#') >= 75){
+            $('.eqLogic[data-eqLogic_id=#id#] .statusBattery').append('<i class="icon jeedom-batterie3 tooltips" title="#battery# % (#batteryDatetime#)" style="font-size : 2em;"></i>');
+        }else if(parseInt('#battery#') >= 50){
+            $('.eqLogic[data-eqLogic_id=#id#] .statusBattery').append('<i class="icon jeedom-batterie2 tooltips" title="#battery# % (#batteryDatetime#)" style="font-size : 2em;"></i>');
+        }else if(parseInt('#battery#') >= 25){
+            $('.eqLogic[data-eqLogic_id=#id#] .statusBattery').append('<i class="icon jeedom-batterie1 tooltips" title="#battery# % (#batteryDatetime#)" style="font-size : 2em;"></i>');
+        }else{
+            $('.eqLogic[data-eqLogic_id=#id#] .statusBattery').append('<i class="icon jeedom-batterie0 tooltips" title="#battery# % (#batteryDatetime#)" style="font-size : 2em;"></i>');
+        }
+    }
+</script>
