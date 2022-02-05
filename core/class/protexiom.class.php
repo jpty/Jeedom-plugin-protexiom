@@ -962,7 +962,7 @@ class protexiom extends eqLogic {
      */
 	public function toHtml($_version = 'dashboard') {
     // if($this->getConfiguration('useProtexiomTemplate','1') == '0')
-    return parent::toHtml($_version);
+    // return parent::toHtml($_version);
 		$replace = $this->preToHtml($_version);
 		if (!is_array($replace)) {
       // message::add(__CLASS__, 'Error preToHtml');
