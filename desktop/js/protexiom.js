@@ -27,12 +27,36 @@ $('.eqLogicAction[data-action=hide]').on('click', function () {
     return false;
 });
 
+$('#in_searchEqlogic2').off('keyup').keyup(function () {
+  var search = $(this).value().toLowerCase();
+  search = search.normalize('NFD').replace(/[\u0300-\u036f]/g, "")
+  if(search == ''){
+    $('.eqLogicDisplayCard.second').show();
+    $('.eqLogicThumbnailContainer.second').packery();
+    return;
+  }
+  $('.eqLogicDisplayCard.second').hide();
+  $('.eqLogicDisplayCard.second .name').each(function(){
+    var text = $(this).text().toLowerCase();
+    text = text.normalize('NFD').replace(/[\u0300-\u036f]/g, "")
+    if(text.indexOf(search) >= 0){
+      $(this).closest('.eqLogicDisplayCard.second').show();
+    }
+  });
+  $('.eqLogicThumbnailContainer.second').packery();
+});
+
+$('#bt_resetEqlogicSearch2').on('click', function () {
+  $('#in_searchEqlogic2').val('')
+  $('#in_searchEqlogic2').keyup()
+})
+
 /*
  * Show modals
  */
 //Show protexiom tree modal
 $('#bt_displayElmtTree').on('click', function () {
-	$('#md_modal').dialog({title: "{{Arbre des composants protexiom}}"});
+	$('#md_modal').dialog({title: "{{Arbre des composants Protexiom}}"});
 	$('#md_modal').load('index.php?v=d&plugin=protexiom&modal=protexiom.tree&id=' + $('.eqLogicAttr[data-l1key=id]').value()).dialog('open');
 });
 //Show protexiom tree modal
@@ -226,3 +250,43 @@ function addCmdToTableSubDevice(_cmd) {
     
 }
 
+$('.eqLogicAttr[data-l1key=eqType_name]').on('change',function(){
+  var newType = $('.eqLogicAttr[data-l1key=eqType_name]').val();
+  if(newType == 'protexiom') {
+    document.getElementById("ProtexiomEqptName").innerHTML = 'Nom de la centrale';
+    $('#paramSpec').show();
+    $('#ProtexiomHardwareVersion').show();
+    $('#ProtexiomElementTree').show();
+  }
+  else if(newType == 'protexiom_elmt') {
+    document.getElementById("ProtexiomEqptName").innerHTML = 'Nom de l\'élément';
+    $('#paramSpec').hide();
+    $('#ProtexiomHardwareVersion').hide();
+    $('#ProtexiomElementTree').hide();
+  }
+  else if(newType == 'protexiom_ctrl') {
+    document.getElementById("ProtexiomEqptName").innerHTML = 'Nom de la télécommande';
+    $('#paramSpec').hide();
+    $('#ProtexiomHardwareVersion').hide();
+    $('#ProtexiomElementTree').hide();
+  }
+  else if(newType != '')
+    confirm("Unknown Type:" +newType);
+
+});
+
+$('.eqLogicAttr[data-l1key=configuration][data-l2key=item_type]').on('change',function(){
+  var newImg = $('.eqLogicAttr[data-l1key=configuration][data-l2key=item_type]').val();
+  if(newImg != '')
+    document.getElementById("PluginImage").src ="plugins/protexiom/desktop/images/" +newImg+ ".png";
+  else {
+    var newType = $('.eqLogicAttr[data-l1key=eqType_name]').val();
+    var newLogicalId = $('.eqLogicAttr[data-l1key=logicalId]').val();
+    if(newType == 'protexiom_ctrl' && newLogicalId != '') {
+      newImg = newLogicalId.substr(newLogicalId.indexOf('-')+1);
+      document.getElementById("PluginImage").src ="plugins/protexiom/desktop/images/ctrl_"+newImg+".png";
+    }
+    else
+      document.getElementById("PluginImage").src ="plugins/protexiom/plugin_info/protexiom_icon.png";
+  }
+});

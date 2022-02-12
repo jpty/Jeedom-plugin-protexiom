@@ -23,7 +23,7 @@ if (!is_object($eqLogic)) {
 }
 ?>
 <div id="div_protexiomTree">
-<h3>Liste des elements</h3>
+<h3>Liste des éléments</h3>
 <pre>
 <?php 
 print_r($eqLogic->getElementsFromCache());
