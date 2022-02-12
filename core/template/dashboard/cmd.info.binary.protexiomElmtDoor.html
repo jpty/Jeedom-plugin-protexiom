@@ -1,15 +1,23 @@
-<div style="width:90px;min-height:62px;" class="cmd #history# tooltips cmd-widget" data-type="info" data-subtype="binary" data-cmd_id="#id#" title="Valeur du #valueDate#, collectée le #collectDate#">
-    <center>
-        <span style="font-weight: bold;font-size : 12px;" class='cmdName'>#name_display#</span>
-        <span style="font-size: 2.5em;font-weight: bold;margin-top: 10px;" class="iconCmd#uid#"></span>
-    </center>
+<div class="cmd cmd-widget #history#" data-type="info" data-subtype="binary" data-template="custom" data-cmd_id="#id#" data-cmd_uid="#uid#" data-version="#version#">
+  <div class="title #hide_name#">
+    <div class="cmdName">#name_display#</div>
+  </div>
+  <div class="content-sm">
+    <span class="iconCmd"></span>
+  </div>
+  <template></template>
+  <script>
+    jeedom.cmd.update['#id#'] =function(_options) {
+      var cmd = $('.cmd[data-cmd_id=#id#]')
 
-    <script>
-        if ('#state#' == '1' || '#state#' == 1) {
-            $('.iconCmd#uid#').addClass('fas jeedom-porte-ferme');
-        }
-        if ('#state#' == '0' || '#state#' == 0) {
-            $('.iconCmd#uid#').addClass('fas jeedom-porte-ouverte');
-        }
-    </script>
+      if (_options.display_value == '1') {
+        cmd.find('.iconCmd').empty().append("<i class='fas fa-door-closed'></i>")
+        cmd.attr('title', 'OK - '+_options.collectDate)
+      } else {
+        cmd.find('.iconCmd').empty().append("<i class='fas fa-door-open icon_red'></i>")
+        cmd.attr('title', 'Ouvert - '+_options.collectDate)
+      }
+    }
+    jeedom.cmd.update['#id#']({display_value: '#state#', valueDate: '#valueDate#', collectDate: '#collectDate#'})
+  </script>
 </div>

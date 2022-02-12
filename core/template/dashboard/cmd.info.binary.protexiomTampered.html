@@ -1,17 +1,23 @@
-<div style="width:62px;min-height:62px;" class="cmd #history# tooltips cmd-widget" data-type="info" data-subtype="binary" data-cmd_id="#id#" title="#collectDate#">
-    <center>
-        <span style="font-weight: 400;font-size : 12px;" class='cmdName'>#name#<br/></span>
-        <span style="font-size: 2em;margin-top: 5px;" class="iconCmd#id#"></span>
-    </center>
+<div class="cmd cmd-widget #history#" data-type="info" data-subtype="binary" data-template="custom" data-cmd_id="#id#" data-cmd_uid="#uid#" data-version="#version#">
+  <div class="title #hide_name#">
+    <div class="cmdName">#name_display#</div>
+  </div>
+  <div class="content-sm">
+    <span class="iconCmd fa-stack fa-2x"></span>
+  </div>
+  <template></template>
+  <script>
+    jeedom.cmd.update['#id#'] =function(_options) {
+      var cmd = $('.cmd[data-cmd_id=#id#]')
 
-    <script>
-        if ('#state#' == '1' || '#state#' == 1) {
-            $('.iconCmd#id#').addClass('fas fa-cube');
-            $('.cmd[data-cmd_id=#id#]').attr('title', 'OK  -  #collectDate#');
-        }
-        if ('#state#' == '0' || '#state#' == 0) {
-            $('.iconCmd#id#').addClass('fab fa-dropbox text-danger');
-            $('.cmd[data-cmd_id=#id#]').attr('title', 'Alarme sabotage  -  #collectDate#');
-        }
-    </script>
+      if (_options.display_value == '1') {
+        cmd.find('.iconCmd').empty().append("<i class='fas fa-cube'></i>")
+        cmd.attr('title', 'OK - '+_options.collectDate)
+      } else {
+        cmd.find('.iconCmd').empty().append("<i style='font-size: 24px' class='fab fa-dropbox fa-stack-1x'></i><i style='font-size: 36px' class='fas fa-exclamation fa-stack-2x icon_red'></i>")
+        cmd.attr('title', 'Alarme sabotage - '+_options.collectDate)
+      }
+    }
+    jeedom.cmd.update['#id#']({display_value: '#state#', valueDate: '#valueDate#', collectDate: '#collectDate#'})
+  </script>
 </div>

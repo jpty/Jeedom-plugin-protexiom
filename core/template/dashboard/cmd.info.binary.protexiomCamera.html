@@ -1,22 +1,23 @@
-<div style="width:62px;min-height:62px;" class="cmd #history# tooltips cmd-widget" data-type="info" data-subtype="binary" data-cmd_id="#id#" title="#collectDate#">
-  <center>
-    <span style="font-size : 12px;" class='cmdName'>#name#<br/></span>
-    <span class="spanCmd#id#">
-      <i style="margin-top: 5px;" class="backIconCmd#id#"></i>
-      <i style="font-size: 2em;margin-top: 5px;" class="frontIconCmd#id#"></i>
-    </span>
-  </center>
-
+<div class="cmd cmd-widget #history#" data-type="info" data-subtype="binary" data-template="custom" data-cmd_id="#id#" data-cmd_uid="#uid#" data-version="#version#">
+  <div class="title #hide_name#">
+    <div class="cmdName">#name_display#</div>
+  </div>
+  <div class="content-sm">
+    <span class="iconCmd fa-stack fa-2x"></span>
+  </div>
+  <template></template>
   <script>
-    if ('#state#' == '1' || '#state#' == 1) {
-      $('.cmd[data-cmd_id=#id#]').attr('title', 'OK  -  #collectDate#');
-      $('.backIconCmd#id#').addClass('fas fa-camera fa-stack-2x'); 
+    jeedom.cmd.update['#id#'] =function(_options) {
+      var cmd = $('.cmd[data-cmd_id=#id#]')
+
+      if (_options.display_value == '1') {
+        cmd.find('.iconCmd').empty().append("<i class='fas fa-camera'></i>")
+        cmd.attr('title', 'OK - '+_options.collectDate)
+      } else {
+        cmd.find('.iconCmd').empty().append("<i style='font-size: 24px' class='fas fa-camera fa-stack-1x'></i><i style='font-size: 48px' class='fas fa-ban fa-stack-2x icon_red'></i>")
+        cmd.attr('title', 'Caméra absente - '+_options.collectDate)
+      }
     }
-    if ('#state#' == '0' || '#state#' == 0) {
-      $('.spanCmd#id#').addClass('fa-stack fa-1x');
-      $('.backIconCmd#id#').addClass('fas fa-camera fa-stack-1x');
-      $('.frontIconCmd#id#').addClass('fas fa-ban fa-stack-2x text-danger');
-      $('.cmd[data-cmd_id=#id#]').attr('title', 'Camera absente  -  #collectDate#');
-    }
+    jeedom.cmd.update['#id#']({display_value: '#state#', valueDate: '#valueDate#', collectDate: '#collectDate#'})
   </script>
 </div>

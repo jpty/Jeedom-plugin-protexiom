@@ -14,7 +14,7 @@
  */
 
 /* * ***************************Includes********************************* */
-require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
+require_once __DIR__ . '/../../../../core/php/core.inc.php';
 
 class protexiom_elmt extends eqLogic {
     /*     * *************************Attributs****************************** */
@@ -105,13 +105,54 @@ class protexiom_elmt extends eqLogic {
 	 */
 	public function getImgFilePath() {
 		$imgName=$this->getConfiguration('item_type','typedefault') . '.png';
-		$localFileName=dirname(__FILE__) . '/../../desktop/images/' . $imgName;
-		if(file_exists($localFileName)){
+		$localFileName=__DIR__ . '/../../desktop/images/' . $imgName;
+		if(file_exists($localFileName)) {
 			return $imgName;
-		}else{
+    }
+    else {
 			return false;
 		}
 	}//End function getImgFilePath
+
+  /**
+	 * Called to display the widget with zone name in the title
+   * Standard Jeedom function
+   * @param string $_version Widget version to display (mobile, dashboard or scenario)
+   * @return string widget HTML code
+   *
+	 * @author jpty - Based on jeedom core version 4.2
+	 */
+  public function toHtml($_version = 'dashboard') {
+		$replace = $this->preToHtml($_version);
+		if (!is_array($replace)) {
+			return $replace;
+		}
+		$_version = jeedom::versionAlias($_version);
+
+    $replace['#eqLogic_class#'] = 'eqLogic_layout_default';
+    $cmd_html = '';
+    $br_before = 0;
+    foreach ($this->getCmd(null, null, true) as $cmd) {
+      if (isset($replace['#refresh_id#']) && $cmd->getId() == $replace['#refresh_id#']) {
+        continue;
+      }
+      if ($_version == 'dashboard' && $br_before == 0 && $cmd->getDisplay('forceReturnLineBefore', 0) == 1) {
+        $cmd_html .= '<br/>';
+      }
+      $cmd_html .= $cmd->toHtml($_version, '');
+      $br_before = 0;
+      if ($_version == 'dashboard' && $cmd->getDisplay('forceReturnLineAfter', 0) == 1) {
+      $cmd_html .= '<br/>';
+      $br_before = 1;
+      }
+    }
+    $replace['#cmd#'] = $cmd_html;
+       // add zone name in the title of the tile
+    $zone = $this->getConfiguration('item_zone','');
+    if($zone != '')  $replace['#name_display#'] .= " ($zone)";
+
+		return $this->postToHtml($_version, template_replace($replace, getTemplate('core', $_version, 'eqLogic')));
+  }  // end toHtml function
 }
 
 class protexiom_elmtCmd extends cmd 
