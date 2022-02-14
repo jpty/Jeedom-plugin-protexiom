@@ -654,7 +654,7 @@ class protexiom extends eqLogic {
         $protexiomCmd->setConfiguration('mobileLabel', 'CLR alarm');
         $protexiomCmd->setType('action');
         $protexiomCmd->setSubType('other');
-        $protexiomCmd->setDisplay('icon', '<i class="fas fa-trash-alt"></i>');
+        $protexiomCmd->setDisplay('icon', '<i class="fas fa-trash-alt icon_blue"></i>');
     //Todo Let's not set the generic_type for now, as pulse is not implemented yet
     //$protexiomCmd->setDisplay('generic_type','PULSE');
         $protexiomCmd->setTemplate('dashboard', __CLASS__ .'::protexiomDefault');
@@ -669,7 +669,7 @@ class protexiom extends eqLogic {
         $protexiomCmd->setConfiguration('mobileLabel', 'CLR bat');
         $protexiomCmd->setType('action');
         $protexiomCmd->setSubType('other');
-        $protexiomCmd->setDisplay('icon', '<i class="fas fa-trash-alt"></i>');
+        $protexiomCmd->setDisplay('icon', '<i class="fas fa-trash-alt icon_blue"></i>');
     //Todo Let's not set the generic_type for now, as pulse is not implemented yet
     //$protexiomCmd->setDisplay('generic_type','PULSE');
         $protexiomCmd->setTemplate('dashboard', __CLASS__ .'::protexiomDefault');
@@ -684,7 +684,7 @@ class protexiom extends eqLogic {
         $protexiomCmd->setConfiguration('mobileLabel', 'CLR link');
         $protexiomCmd->setType('action');
         $protexiomCmd->setSubType('other');
-        $protexiomCmd->setDisplay('icon', '<i class="fas fa-trash-alt"></i>');
+        $protexiomCmd->setDisplay('icon', '<i class="fas fa-trash-alt icon_blue"></i>');
     //Todo Let's not set the generic_type for now, as pulse is not implemented yet
     //$protexiomCmd->setDisplay('generic_type','PULSE');
         $protexiomCmd->setTemplate('dashboard', __CLASS__ .'::protexiomDefault');
