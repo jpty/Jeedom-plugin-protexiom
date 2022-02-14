@@ -10,6 +10,7 @@ Reprise du plugin protexiom pour Jeedom v4.2
 - Réduction des interrogations de la centrale pour obtenir le statut des éléments. (L'interrogation est faite uniquement si les valeurs de tampered, link, battery, pause changent ou si au moins une porte/fenêtre est ouverte)
 
 ## TODO
+- MAJ des templates sur les commandes (ajout protexiom:: si inchangée)
 - Templates des équipements sur mobile.
 - Suppression des classes protexiom_ctrl et protexiom_elmt
 - Suppression Protexiom non configurée impossible. Message: Adresse IP invalide
