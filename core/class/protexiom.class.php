@@ -315,7 +315,7 @@ class protexiom extends eqLogic {
           }
 
           if($myError=$this->_spBrowser->doLogin()){
-            $this->log('error', 'Login failed while trying to workaround somfy empty XML bug. Returned error: '.$myError);
+            $this->log('warning', 'Login failed while trying to workaround somfy empty XML bug. Returned error: '.$myError);
             return 1;
           }
           else { // Login OK

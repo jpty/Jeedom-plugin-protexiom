@@ -243,7 +243,6 @@ foreach ($eqLogics as $eqLogic) {
               </div>
             </div>
             <!-- Partie droite de l'onglet "Équipement" -->
-						<!-- Affiche l'icône du plugin par défaut mais vous pouvez y afficher les informations de votre choix -->
 						<div class="col-lg-6">
 							<legend><i class="fas fa-info"></i> {{Informations}}</legend>
 							<div class="form-group">
@@ -256,6 +255,30 @@ foreach ($eqLogics as $eqLogic) {
                 <label class="col-sm-3 control-label">{{Zone}}<br></label>
                 <div class="col-sm-7">
                   <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="item_zone" disabled/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">{{Label Somfy}}<br></label>
+                <div class="col-sm-7">
+                  <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="item_label" disabled/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">{{Type Somfy}}<br></label>
+                <div class="col-sm-7">
+                  <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="item_type" disabled/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">{{Date création}}<br></label>
+                <div class="col-sm-7">
+                  <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="createtime" disabled/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">{{Date batterie}}<br></label>
+                <div class="col-sm-7">
+                  <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="batterytime" disabled/>
                 </div>
               </div>
               <div id="ProtexiomHardwareVersion" class="form-group">
