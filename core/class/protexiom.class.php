@@ -586,8 +586,8 @@ class protexiom extends eqLogic {
         $protexiomCmd->setSubType('other');
         $protexiomCmd->setDisplay('icon', '<i class="fas fa-lock"></i>');
     $protexiomCmd->setDisplay('generic_type','ALARM_ARMED');
-        $protexiomCmd->setTemplate('dashboard', 'protexiomDefault');
-        $protexiomCmd->setTemplate('mobile', 'protexiomDefault');
+        $protexiomCmd->setTemplate('dashboard', __CLASS__ .'::protexiomDefault');
+        $protexiomCmd->setTemplate('mobile', __CLASS__ .'::protexiomDefault');
         $protexiomCmd->save();
 
         $protexiomCmd = new protexiomCmd();
@@ -600,8 +600,8 @@ class protexiom extends eqLogic {
         $protexiomCmd->setSubType('other');
         $protexiomCmd->setDisplay('icon', '<i class="fas fa-lock"></i>');
     $protexiomCmd->setDisplay('generic_type','ALARM_SET_MODE');
-        $protexiomCmd->setTemplate('dashboard', 'protexiomDefault');
-        $protexiomCmd->setTemplate('mobile', 'protexiomDefault');
+        $protexiomCmd->setTemplate('dashboard', __CLASS__ .'::protexiomDefault');
+        $protexiomCmd->setTemplate('mobile', __CLASS__ .'::protexiomDefault');
         $protexiomCmd->save();
 
         $protexiomCmd = new protexiomCmd();
@@ -614,8 +614,8 @@ class protexiom extends eqLogic {
         $protexiomCmd->setSubType('other');
         $protexiomCmd->setDisplay('icon', '<i class="fas fa-lock"></i>');
     $protexiomCmd->setDisplay('generic_type','ALARM_SET_MODE');
-        $protexiomCmd->setTemplate('dashboard', 'protexiomDefault');
-        $protexiomCmd->setTemplate('mobile', 'protexiomDefault');
+        $protexiomCmd->setTemplate('dashboard', __CLASS__ .'::protexiomDefault');
+        $protexiomCmd->setTemplate('mobile', __CLASS__ .'::protexiomDefault');
         $protexiomCmd->save();
 
         $protexiomCmd = new protexiomCmd();
@@ -628,8 +628,8 @@ class protexiom extends eqLogic {
         $protexiomCmd->setSubType('other');
         $protexiomCmd->setDisplay('icon', '<i class="fas fa-lock"></i>');
     $protexiomCmd->setDisplay('generic_type','ALARM_SET_MODE');
-        $protexiomCmd->setTemplate('dashboard', 'protexiomDefault');
-        $protexiomCmd->setTemplate('mobile', 'protexiomDefault');
+        $protexiomCmd->setTemplate('dashboard', __CLASS__ .'::protexiomDefault');
+        $protexiomCmd->setTemplate('mobile', __CLASS__ .'::protexiomDefault');
         $protexiomCmd->save();
 
         $protexiomCmd = new protexiomCmd();
@@ -642,8 +642,8 @@ class protexiom extends eqLogic {
         $protexiomCmd->setSubType('other');
         $protexiomCmd->setDisplay('icon', '<i class="fas fa-unlock"></i>');
     $protexiomCmd->setDisplay('generic_type','ALARM_RELEASED');
-        $protexiomCmd->setTemplate('dashboard', 'protexiomDefault');
-        $protexiomCmd->setTemplate('mobile', 'protexiomDefault');
+        $protexiomCmd->setTemplate('dashboard', __CLASS__ .'::protexiomDefault');
+        $protexiomCmd->setTemplate('mobile', __CLASS__ .'::protexiomDefault');
         $protexiomCmd->save();
         
         $protexiomCmd = new protexiomCmd();
@@ -657,8 +657,8 @@ class protexiom extends eqLogic {
         $protexiomCmd->setDisplay('icon', '<i class="fas fa-trash-alt"></i>');
     //Todo Let's not set the generic_type for now, as pulse is not implemented yet
     //$protexiomCmd->setDisplay('generic_type','PULSE');
-        $protexiomCmd->setTemplate('dashboard', 'protexiomDefault');
-        $protexiomCmd->setTemplate('mobile', 'protexiomDefault');
+        $protexiomCmd->setTemplate('dashboard', __CLASS__ .'::protexiomDefault');
+        $protexiomCmd->setTemplate('mobile', __CLASS__ .'::protexiomDefault');
         $protexiomCmd->save();
         
         $protexiomCmd = new protexiomCmd();
@@ -672,8 +672,8 @@ class protexiom extends eqLogic {
         $protexiomCmd->setDisplay('icon', '<i class="fas fa-trash-alt"></i>');
     //Todo Let's not set the generic_type for now, as pulse is not implemented yet
     //$protexiomCmd->setDisplay('generic_type','PULSE');
-        $protexiomCmd->setTemplate('dashboard', 'protexiomDefault');
-        $protexiomCmd->setTemplate('mobile', 'protexiomDefault');
+        $protexiomCmd->setTemplate('dashboard', __CLASS__ .'::protexiomDefault');
+        $protexiomCmd->setTemplate('mobile', __CLASS__ .'::protexiomDefault');
         $protexiomCmd->save();
         
         $protexiomCmd = new protexiomCmd();
@@ -687,8 +687,8 @@ class protexiom extends eqLogic {
         $protexiomCmd->setDisplay('icon', '<i class="fas fa-trash-alt"></i>');
     //Todo Let's not set the generic_type for now, as pulse is not implemented yet
     //$protexiomCmd->setDisplay('generic_type','PULSE');
-        $protexiomCmd->setTemplate('dashboard', 'protexiomDefault');
-        $protexiomCmd->setTemplate('mobile', 'protexiomDefault');
+        $protexiomCmd->setTemplate('dashboard', __CLASS__ .'::protexiomDefault');
+        $protexiomCmd->setTemplate('mobile', __CLASS__ .'::protexiomDefault');
         $protexiomCmd->save();
         
         // Info CMD
@@ -704,8 +704,8 @@ class protexiom extends eqLogic {
         $protexiomCmd->setSubType('binary');
     //Todo set generic type to DONT and implement a ALARM_MODE info, as well as a global ALARM_ENABLE_STATE
     $protexiomCmd->setDisplay('generic_type','ALARM_ENABLE_STATE');
-        $protexiomCmd->setTemplate('dashboard', 'protexiomZone');
-        $protexiomCmd->setTemplate('mobile', 'protexiomZone');
+        $protexiomCmd->setTemplate('dashboard', __CLASS__ .'::protexiomZone');
+        $protexiomCmd->setTemplate('mobile', __CLASS__ .'::protexiomZone');
         $protexiomCmd->save();
          
         $protexiomCmd = new protexiomCmd();
@@ -719,8 +719,8 @@ class protexiom extends eqLogic {
         $protexiomCmd->setSubType('binary');
     //Todo set generic type to DONT and implement a ALARM_MODE info, as well as a global ALARM_ENABLE_STATE
     $protexiomCmd->setDisplay('generic_type','ALARM_ENABLE_STATE');
-        $protexiomCmd->setTemplate('dashboard', 'protexiomZone');
-        $protexiomCmd->setTemplate('mobile', 'protexiomZone');
+        $protexiomCmd->setTemplate('dashboard', __CLASS__ .'::protexiomZone');
+        $protexiomCmd->setTemplate('mobile', __CLASS__ .'::protexiomZone');
         $protexiomCmd->save();
          
         $protexiomCmd = new protexiomCmd();
@@ -734,8 +734,8 @@ class protexiom extends eqLogic {
         $protexiomCmd->setSubType('binary');
     //Todo set generic type to DONT and implement a ALARM_MODE info, as well as a global ALARM_ENABLE_STATE
     $protexiomCmd->setDisplay('generic_type','ALARM_ENABLE_STATE');
-        $protexiomCmd->setTemplate('dashboard', 'protexiomZone');
-        $protexiomCmd->setTemplate('mobile', 'protexiomZone');
+        $protexiomCmd->setTemplate('dashboard', __CLASS__ .'::protexiomZone');
+        $protexiomCmd->setTemplate('mobile', __CLASS__ .'::protexiomZone');
         $protexiomCmd->save();
         
         $protexiomCmd = new protexiomCmd();
@@ -749,8 +749,8 @@ class protexiom extends eqLogic {
         $protexiomCmd->setSubType('binary');
     $protexiomCmd->setDisplay('generic_type','BATTERY');
         $protexiomCmd->setIsVisible(0);
-        $protexiomCmd->setTemplate('dashboard', 'protexiomBattery');
-        $protexiomCmd->setTemplate('mobile', 'protexiomBattery');
+        $protexiomCmd->setTemplate('dashboard', __CLASS__ .'::protexiomBattery');
+        $protexiomCmd->setTemplate('mobile', __CLASS__ .'::protexiomBattery');
         $protexiomCmd->save();
         
         $protexiomCmd = new protexiomCmd();
@@ -763,8 +763,8 @@ class protexiom extends eqLogic {
         $protexiomCmd->setType('info');
         $protexiomCmd->setSubType('binary');
     $protexiomCmd->setDisplay('generic_type','DONT');
-        $protexiomCmd->setTemplate('dashboard', 'protexiomLink');
-        $protexiomCmd->setTemplate('mobile', 'protexiomLink');
+        $protexiomCmd->setTemplate('dashboard', __CLASS__ .'::protexiomLink');
+        $protexiomCmd->setTemplate('mobile', __CLASS__ .'::protexiomLink');
         $protexiomCmd->save();
         
         $protexiomCmd = new protexiomCmd();
@@ -777,8 +777,8 @@ class protexiom extends eqLogic {
         $protexiomCmd->setType('info');
         $protexiomCmd->setSubType('binary');
     $protexiomCmd->setDisplay('generic_type','OPENING');
-        $protexiomCmd->setTemplate('dashboard', 'protexiomDoor');
-        $protexiomCmd->setTemplate('mobile', 'protexiomDoor');
+        $protexiomCmd->setTemplate('dashboard', __CLASS__ .'::protexiomDoor');
+        $protexiomCmd->setTemplate('mobile', __CLASS__ .'::protexiomDoor');
         $protexiomCmd->save();
         
         $protexiomCmd = new protexiomCmd();
@@ -792,8 +792,8 @@ class protexiom extends eqLogic {
         $protexiomCmd->setSubType('string');
     //Todo Implement different info CMD, for ALARM_STATE, SMOKE, FLOOD
     //$protexiomCmd->setDisplay('generic_type','ALARM_STATE');
-        $protexiomCmd->setTemplate('dashboard', 'protexiomAlarm');
-        $protexiomCmd->setTemplate('mobile', 'protexiomAlarm');
+        $protexiomCmd->setTemplate('dashboard', __CLASS__ .'::protexiomAlarm');
+        $protexiomCmd->setTemplate('mobile', __CLASS__ .'::protexiomAlarm');
         $protexiomCmd->save();
         
         $protexiomCmd = new protexiomCmd();
@@ -806,8 +806,8 @@ class protexiom extends eqLogic {
         $protexiomCmd->setType('info');
         $protexiomCmd->setSubType('binary');
     $protexiomCmd->setDisplay('generic_type','SABOTAGE');
-        $protexiomCmd->setTemplate('dashboard', 'protexiomTampered');
-        $protexiomCmd->setTemplate('mobile', 'protexiomTampered');
+        $protexiomCmd->setTemplate('dashboard', __CLASS__ .'::protexiomTampered');
+        $protexiomCmd->setTemplate('mobile', __CLASS__ .'::protexiomTampered');
         $protexiomCmd->save();
         
         $protexiomCmd = new protexiomCmd();
@@ -820,8 +820,8 @@ class protexiom extends eqLogic {
         $protexiomCmd->setType('info');
         $protexiomCmd->setSubType('string');
     $protexiomCmd->setDisplay('generic_type','GENERIC_INFO');
-        $protexiomCmd->setTemplate('dashboard', 'protexiomDefault');
-        $protexiomCmd->setTemplate('mobile', 'protexiomDefault');
+        $protexiomCmd->setTemplate('dashboard', __CLASS__ .'::protexiomDefault');
+        $protexiomCmd->setTemplate('mobile', __CLASS__ .'::protexiomDefault');
         $protexiomCmd->save();
         
         $protexiomCmd = new protexiomCmd();
@@ -835,8 +835,8 @@ class protexiom extends eqLogic {
         $protexiomCmd->setType('info');
         $protexiomCmd->setSubType('numeric');
     $protexiomCmd->setDisplay('generic_type','DONT');
-        $protexiomCmd->setTemplate('dashboard', 'protexiomGsmSignal');
-        $protexiomCmd->setTemplate('mobile', 'protexiomGsmSignal');
+        $protexiomCmd->setTemplate('dashboard', __CLASS__ .'::protexiomGsmSignal');
+        $protexiomCmd->setTemplate('mobile', __CLASS__ .'::protexiomGsmSignal');
         $protexiomCmd->save();
         
         $protexiomCmd = new protexiomCmd();
@@ -849,8 +849,8 @@ class protexiom extends eqLogic {
         $protexiomCmd->setType('info');
         $protexiomCmd->setSubType('string');
     $protexiomCmd->setDisplay('generic_type','GENERIC_INFO');
-        $protexiomCmd->setTemplate('dashboard', 'protexiomDefault');
-        $protexiomCmd->setTemplate('mobile', 'protexiomDefault');
+        $protexiomCmd->setTemplate('dashboard', __CLASS__ .'::protexiomDefault');
+        $protexiomCmd->setTemplate('mobile', __CLASS__ .'::protexiomDefault');
         $protexiomCmd->save();
         
         $protexiomCmd = new protexiomCmd();
@@ -863,8 +863,8 @@ class protexiom extends eqLogic {
         $protexiomCmd->setType('info');
         $protexiomCmd->setSubType('binary');
     $protexiomCmd->setDisplay('generic_type','DONT');
-        $protexiomCmd->setTemplate('dashboard', 'protexiomCamera');
-        $protexiomCmd->setTemplate('mobile', 'protexiomCamera');
+        $protexiomCmd->setTemplate('dashboard', __CLASS__ .'::protexiomCamera');
+        $protexiomCmd->setTemplate('mobile', __CLASS__ .'::protexiomCamera');
         $protexiomCmd->save();
         
         //subEqlogic will be taken care of in postSave, as detecting them require protexiom eqLogic to be enabled and connected to the protexiom box
@@ -1341,42 +1341,42 @@ class protexiom extends eqLogic {
             }
             switch ($cmdName) {
               case "pause":
-                $elmtCmd->setTemplate('dashboard', 'protexiomPause');
-                $elmtCmd->setTemplate('mobile', 'protexiomPause');
+                $elmtCmd->setTemplate('dashboard', __CLASS__ .'::protexiomPause');
+                $elmtCmd->setTemplate('mobile', __CLASS__ .'::protexiomPause');
                 $elmtCmd->setIsVisible(0);
                 break;
               case "battery":
-                $elmtCmd->setTemplate('dashboard', 'protexiomElmtBattery');
-                $elmtCmd->setTemplate('mobile', 'protexiomElmtBattery');
+                $elmtCmd->setTemplate('dashboard', __CLASS__ .'::protexiomElmtBattery');
+                $elmtCmd->setTemplate('mobile', __CLASS__ .'::protexiomElmtBattery');
                 $elmtCmd->setIsVisible(0);
                 $elmtCmd->setDisplay('generic_type','BATTERY');
                 break;
               case "tampered":
-                $elmtCmd->setTemplate('dashboard', 'protexiomElmtTampered');
-                $elmtCmd->setTemplate('mobile', 'protexiomElmtTampered');
+                $elmtCmd->setTemplate('dashboard', __CLASS__ .'::protexiomElmtTampered');
+                $elmtCmd->setTemplate('mobile', __CLASS__ .'::protexiomElmtTampered');
                 $elmtCmd->setIsVisible(1);
                 $elmtCmd->setDisplay('generic_type','SABOTAGE');
                 $elmtCmd->setDisplay('invertBinary','1');
                 break;
               case "alarm":
-                $elmtCmd->setTemplate('dashboard', 'protexiomAlarm');
-                $elmtCmd->setTemplate('mobile', 'protexiomAlarm');
+                $elmtCmd->setTemplate('dashboard', __CLASS__ .'::protexiomAlarm');
+                $elmtCmd->setTemplate('mobile', __CLASS__ .'::protexiomAlarm');
                 $elmtCmd->setIsVisible(1);
                 $elmtCmd->setDisplay('generic_type','ALARM_STATE');
                 break;
               case "link":
-                $elmtCmd->setTemplate('dashboard', 'protexiomElmtLink');
-                $elmtCmd->setTemplate('mobile', 'protexiomElmtLink');
+                $elmtCmd->setTemplate('dashboard', __CLASS__ .'::protexiomElmtLink');
+                $elmtCmd->setTemplate('mobile', __CLASS__ .'::protexiomElmtLink');
                 $elmtCmd->setIsVisible(1);
                 break;
               case "door":
                 if($eqLogic->getConfiguration('item_type')=='typedogarage'){
-                  $elmtCmd->setTemplate('dashboard', 'protexiomElmtGarage');
-                  $elmtCmd->setTemplate('mobile', 'protexiomElmtGarage');
+                  $elmtCmd->setTemplate('dashboard', __CLASS__ .'::protexiomElmtGarage');
+                  $elmtCmd->setTemplate('mobile', __CLASS__ .'::protexiomElmtGarage');
                   $elmtCmd->setDisplay('generic_type','OPENING');
                 }else{
-                  $elmtCmd->setTemplate('dashboard', 'protexiomElmtDoor');
-                  $elmtCmd->setTemplate('mobile', 'protexiomElmtDoor');
+                  $elmtCmd->setTemplate('dashboard', __CLASS__ .'::protexiomElmtDoor');
+                  $elmtCmd->setTemplate('mobile', __CLASS__ .'::protexiomElmtDoor');
                   $elmtCmd->setDisplay('generic_type','OPENING');
                 }
                 $elmtCmd->setIsVisible(1);
