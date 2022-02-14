@@ -584,7 +584,7 @@ class protexiom extends eqLogic {
         $protexiomCmd->setConfiguration('mobileLabel', 'On  A+B+C');
         $protexiomCmd->setType('action');
         $protexiomCmd->setSubType('other');
-        $protexiomCmd->setDisplay('icon', '<i class="fas fa-lock"></i>');
+        $protexiomCmd->setDisplay('icon', '<i class="fas fa-lock icon_red"></i>');
     $protexiomCmd->setDisplay('generic_type','ALARM_ARMED');
         $protexiomCmd->setTemplate('dashboard', __CLASS__ .'::protexiomDefault');
         $protexiomCmd->setTemplate('mobile', __CLASS__ .'::protexiomDefault');
@@ -598,7 +598,7 @@ class protexiom extends eqLogic {
         $protexiomCmd->setConfiguration('mobileLabel', 'On A');
         $protexiomCmd->setType('action');
         $protexiomCmd->setSubType('other');
-        $protexiomCmd->setDisplay('icon', '<i class="fas fa-lock"></i>');
+        $protexiomCmd->setDisplay('icon', '<i class="fas fa-lock icon_red"></i>');
     $protexiomCmd->setDisplay('generic_type','ALARM_SET_MODE');
         $protexiomCmd->setTemplate('dashboard', __CLASS__ .'::protexiomDefault');
         $protexiomCmd->setTemplate('mobile', __CLASS__ .'::protexiomDefault');
@@ -612,7 +612,7 @@ class protexiom extends eqLogic {
         $protexiomCmd->setConfiguration('mobileLabel', 'On B');
         $protexiomCmd->setType('action');
         $protexiomCmd->setSubType('other');
-        $protexiomCmd->setDisplay('icon', '<i class="fas fa-lock"></i>');
+        $protexiomCmd->setDisplay('icon', '<i class="fas fa-lock icon_red"></i>');
     $protexiomCmd->setDisplay('generic_type','ALARM_SET_MODE');
         $protexiomCmd->setTemplate('dashboard', __CLASS__ .'::protexiomDefault');
         $protexiomCmd->setTemplate('mobile', __CLASS__ .'::protexiomDefault');
@@ -626,7 +626,7 @@ class protexiom extends eqLogic {
         $protexiomCmd->setConfiguration('mobileLabel', 'On C');
         $protexiomCmd->setType('action');
         $protexiomCmd->setSubType('other');
-        $protexiomCmd->setDisplay('icon', '<i class="fas fa-lock"></i>');
+        $protexiomCmd->setDisplay('icon', '<i class="fas fa-lock icon_red"></i>');
     $protexiomCmd->setDisplay('generic_type','ALARM_SET_MODE');
         $protexiomCmd->setTemplate('dashboard', __CLASS__ .'::protexiomDefault');
         $protexiomCmd->setTemplate('mobile', __CLASS__ .'::protexiomDefault');
@@ -640,7 +640,7 @@ class protexiom extends eqLogic {
         $protexiomCmd->setConfiguration('mobileLabel', 'Off A+B+C');
         $protexiomCmd->setType('action');
         $protexiomCmd->setSubType('other');
-        $protexiomCmd->setDisplay('icon', '<i class="fas fa-unlock"></i>');
+        $protexiomCmd->setDisplay('icon', '<i class="fas fa-unlock icon_green"></i>');
     $protexiomCmd->setDisplay('generic_type','ALARM_RELEASED');
         $protexiomCmd->setTemplate('dashboard', __CLASS__ .'::protexiomDefault');
         $protexiomCmd->setTemplate('mobile', __CLASS__ .'::protexiomDefault');
@@ -829,7 +829,7 @@ class protexiom extends eqLogic {
         $protexiomCmd->setLogicalId('gsm_signal');
         $protexiomCmd->setEqLogic_id($this->id);
         $protexiomCmd->setConfiguration('somfyCmd', 'GSM_SIGNAL');
-        $protexiomCmd->setConfiguration('mobileLabel', 'Récéption GSM');
+        $protexiomCmd->setConfiguration('mobileLabel', 'Réception GSM');
         $protexiomCmd->setConfiguration('maxValue', 5);
         $protexiomCmd->setUnite('');
         $protexiomCmd->setType('info');
@@ -1341,9 +1341,9 @@ class protexiom extends eqLogic {
             }
             switch ($cmdName) {
               case "pause":
-                $elmtCmd->setTemplate('dashboard', __CLASS__ .'::protexiomPause');
-                $elmtCmd->setTemplate('mobile', __CLASS__ .'::protexiomPause');
-                $elmtCmd->setIsVisible(0);
+                $elmtCmd->setTemplate('dashboard', __CLASS__ .'::protexiomElmtPause');
+                $elmtCmd->setTemplate('mobile', __CLASS__ .'::protexiomElmtPause');
+                $elmtCmd->setIsVisible(1);
                 break;
               case "battery":
                 $elmtCmd->setTemplate('dashboard', __CLASS__ .'::protexiomElmtBattery');

@@ -4,10 +4,11 @@
 "licence" : "WFTPL",
 "author" : "Fdp1",
 "installation" : "Aucune",
-"require" : "4.0",
+"require" : "4.2",
 "version" : "2.0.0",
 "category" : "security",
 "hasOwnDeamon" : true,
 "documentation" : "https://fdp1nm.github.io/plugin-protexiom/#language#/",
 "changelog" : "https://github.com/fdp1nm/plugin-protexiom/releases"
 }
+

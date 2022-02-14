@@ -1,0 +1,23 @@
+<div class="cmd cmd-widget #history#" data-type="info" data-subtype="binary" data-template="custom" data-cmd_id="#id#" data-cmd_uid="#uid#" data-version="#version#">
+  <div class="title #hide_name#">
+    <div class="cmdName">#name_display#</div>
+  </div>
+  <div class="content-sm">
+    <span class="iconCmd"></span>
+  </div>
+  <template></template>
+  <script>
+    jeedom.cmd.update['#id#'] =function(_options) {
+      var cmd = $('.cmd[data-cmd_id=#id#]')
+
+      if (_options.display_value == '1') {
+        cmd.find('.iconCmd').empty().append("<i style='color:  var(--al-danger-color) !important' class='fas fa-pause'></i>")
+        cmd.attr('title', 'Interrompu - '+_options.collectDate)
+      } else {
+        cmd.find('.iconCmd').empty().append("<i class='fas fa-play'></i>")
+        cmd.attr('title', 'En fonctionnement - '+_options.collectDate)
+      }
+    }
+    jeedom.cmd.update['#id#']({display_value: '#state#', valueDate: '#valueDate#', collectDate: '#collectDate#'})
+  </script>
+</div>
