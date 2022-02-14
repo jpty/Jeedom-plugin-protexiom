@@ -503,7 +503,7 @@ class phpProtexiom {
 				if(preg_replace('/^\//', "", $response['responseHeaders']['Location'])==preg_replace('/^\//', "", $this->hwParam['URL']['Error'])){
 					$myError="Somfy protexiom returned : ".$this->getSomfyError();
 				}elseif(preg_replace('/^\//', "", !$response['responseHeaders']['Location'])==preg_replace('/^\//', "", $location)){
-					$myError="Unknow error (HTTP return code: 302 and Location: ".$response['responseHeaders']['Location'].")";
+					$myError="Unknown error (HTTP return code: 302 and Location: ".$response['responseHeaders']['Location'].")";
 				}//else we got the Location. $myError=""
 			}
 		}elseif($response['returnCode']=='1'){
@@ -515,10 +515,10 @@ class phpProtexiom {
 				if(preg_replace('/^\//', "", $response['responseHeaders']['Location'])==preg_replace('/^\//', "", $this->hwParam['URL']['Error'])){
 					$myError="Somfy protexiom returned : ".$this->getSomfyError();					
 				}else{
-					$myError="Unknow error (HTTP return code: 302 and Location: ".$response['responseHeaders']['Location'].")";
+					$myError="Unknown error (HTTP return code: 302 and Location: ".$response['responseHeaders']['Location'].")";
 				}
 			}else{
-				$myError="Unknow error (HTTP return code ".$response['returnCode'].")";
+				$myError="Unknown error (HTTP return code ".$response['returnCode'].")";
 			}
 		}
 		return $myError;

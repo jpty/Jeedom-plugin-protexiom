@@ -80,7 +80,8 @@ class protexiom extends eqLogic {
       }
       $t1 = microtime(true);
       $dat = date('Gi');
-      log::add(__CLASS__, 'debug', '[*-*-*-*] END OF Protexiom pull [*-*-*-*] Duration: '.round($t1-$t0,1) .'s');
+      $duration = round($t1-$t0,1);
+      log::add(__CLASS__, (($duration>2)?'info':'debug'), "[*-*-*-*] END OF Protexiom pull [*-*-*-*] Duration: ${duration}s. Memory_usage: ".memory_get_usage());
       return;
     } // end pull function
     
@@ -162,10 +163,11 @@ class protexiom extends eqLogic {
         $protexiom->log('debug', 'Logging off during daemon_stop');
         $protexiom->initSpBrowser();
         if (($protexiom->_spBrowser->authCookie)){//not Empty authCookie means logged in
-          if(!$myError=$protexiom->_spBrowser->doLogout()){
+          if(!$myError=$protexiom->_spBrowser->doLogout()) {
             $protexiom->log('debug', 'Successfull logout during daemon_stop');
             cache::byKey('somfyAuthCookie::'.$protexiom->getId())->remove();
-          }else{
+          }
+          else {
             $protexiom->log('debug', 'Logout failed during daemon_stop. Returned error: '.$myError);
           }
         }
@@ -181,7 +183,7 @@ class protexiom extends eqLogic {
     public static function checkConfig() {
       //Checking polling interval
       if(!filter_var(config::byKey('pollInt', __CLASS__), FILTER_VALIDATE_INT, array('options' => array('min_range' => 5)))){
-        throw new Exception(__('La frequence de mise à jour (polling) est invalide. Elle doit contenir un nombre (entier) de seconde superieur a 5.', __FILE__));
+        throw new Exception(__('La fréquence de mise à jour (polling) est invalide. Elle doit être un nombre entier de secondes supérieur à 5.', __FILE__));
       }
        
     }//End checkConfig func
@@ -224,7 +226,7 @@ class protexiom extends eqLogic {
       }
       
       $return[] = array(
-          'test' => __('Nombre de centrales somfy', __FILE__),
+          'test' => __('Nombre de centrales Somfy', __FILE__),
           'result' => "$numberProtexiom ($numberProtexiomEnabled enabled)",
           'advice' => ($numberProtexiom) ? '' : __('Veuillez créer un équipement Alarme Somfy.', __FILE__),
           'state' => true,
@@ -233,9 +235,9 @@ class protexiom extends eqLogic {
       //PollingInterval
       $pollInt=config::byKey('pollInt', __CLASS__);
       $return[] = array(
-          'test' => __('Interval de polling', __FILE__),
+          'test' => __('Intervalle de polling', __FILE__),
           'result' => ($pollInt) ? __("$pollInt secondes", __FILE__) : __('NOK', __FILE__),
-          'advice' => ($pollInt) ? '' : __('Interval de polling introuvable. Vérifier la configuration du plugin.', __FILE__),
+          'advice' => ($pollInt) ? '' : __('Intervalle de polling introuvable. Vérifier la configuration du plugin.', __FILE__),
           'state' => $pollInt,
       );
       
@@ -275,7 +277,7 @@ class protexiom extends eqLogic {
      * @param string $message message to add in the log.
      */
     public function log($_type = 'INFO', $_message){
-      log::add(__CLASS__, $_type, '['.$this->name.'-'.$this->getId().'] '.getmypid().' '.$_message, $this->name);
+      log::add(__CLASS__, $_type, '['.$this->name.'-'.$this->getId().'] PID:'.getmypid().' '.$_message, $this->name);
     }//End log func
     
     /**
@@ -284,14 +286,13 @@ class protexiom extends eqLogic {
      * @return 0 in case of sucess, 1 otherwise
      */
     public function pullStatus($forceElementUpdate=false) {
-       
       $myError="";
       if (!is_object($this->_spBrowser)) {
         $this->initSpBrowser();
       }
       if($myError=$this->_spBrowser->pullStatus()){
         //An error occured while pulling status. This may be a session timeout issue.
-        $this->log('debug', 'The folowing error occured while pulling status: '.$myError.'. This may be a session timeout issue. Let\'s workaround it');
+        $this->log('debug', 'The following error occured while pulling status: '.$myError.'. This may be a session timeout issue. Let\'s workaround it');
         if(!$myError=$this->workaroundSomfySessionTimeoutBug()){
           $myError=$this->_spBrowser->pullStatus();
         }
@@ -316,7 +317,8 @@ class protexiom extends eqLogic {
           if($myError=$this->_spBrowser->doLogin()){
             $this->log('error', 'Login failed while trying to workaround somfy empty XML bug. Returned error: '.$myError);
             return 1;
-          }else{//Login OK
+          }
+          else { // Login OK
             cache::set('somfyAuthCookie::'.$this->getId(), $this->_spBrowser->authCookie, $this->_SomfySessionCookieTTL);
             $myError=$this->_spBrowser->pullStatus();
           }
@@ -342,14 +344,13 @@ class protexiom extends eqLogic {
      * @return 0 in case of sucess, 1 otherwise
      */
     public function pullElements() {
-    
       $myError="";
       if (!is_object($this->_spBrowser)) {
         $this->initSpBrowser();
       }
       if($myError=$this->_spBrowser->pullElements()){
         //An error occured while pulling status. This may be a session timeout issue.
-        $this->log('debug', 'The folowing error occured while pulling elements: '.$myError.'. This may be a session timeout issue. Let\'s workaround it');
+        $this->log('debug', 'The following error occured while pulling elements: '.$myError.'. This may be a session timeout issue. Let\'s workaround it');
         if(!$myError=$this->workaroundSomfySessionTimeoutBug()){
           $myError=$this->_spBrowser->pullElements();
         }
@@ -362,7 +363,7 @@ class protexiom extends eqLogic {
         //Elements pulled. Let's now refreh CMD
         $this->log('debug', 'Elements refreshed');
         $this->setElementsFromSpBrowser();
-        $this->log('debug', 'Pull elements... Done');
+        $this->log('info', 'Pull elements... Done');
         return 0;
       }
     }//End function pullElements()
@@ -997,6 +998,7 @@ class protexiom extends eqLogic {
       }
     }
     $replace['#cmd#'] = $cmd_html;
+    if(version_compare(jeedom::version(),'4.1','<')) $replace['#divGraphInfo#'] = '';
     return $this->postToHtml($_version, template_replace($replace, getTemplate('core', $version, 'eqLogic',__CLASS__)));
   }//end toHtml function  
 
@@ -1030,7 +1032,8 @@ class protexiom extends eqLogic {
           cache::set('somfyAuthCookie::'.$this->getId(), $this->_spBrowser->authCookie, $this->_SomfySessionCookieTTL);
           
         }
-      }else{
+      }
+      else {
         // No cached cookie found... Login off and on again should be performed somewhere else. Let's wait 2 seconds for it to be done
         sleep(2);
       $this->log('debug', 'Session timeout bug is not likely as no cookie as been found. Let\'s wait for 2 seconds, as login off and on again may be running somewhere else');
@@ -1149,6 +1152,40 @@ class protexiom extends eqLogic {
     }//End function propagateIsEnable2subDevices
     
 
+    /*
+     * returns true only if the value has been modified
+     */
+    public function checkAndUpdateCmdProtexiom($_cmd, $_value, $_updateTime = null) {
+      if ($this->getIsEnable() == 0) {
+        return false;
+      }
+      if (!is_object($_cmd)) {
+        return false;
+      }
+      $oldValue = $_cmd->execCmd();
+      if ($oldValue !== $_cmd->formatValue($_value) || $oldValue === '') {
+        $_cmd->event($_value, $_updateTime);
+// log::add(__CLASS__,'error','True value '.__LINE__ .' Oldvalue='.$oldValue.' New='.$_value );
+        return true;
+      }
+      if ($_updateTime !== null && $_updateTime !== false) {
+        if (strtotime($_cmd->getCollectDate()) < strtotime($_updateTime)) {
+          $_cmd->event($_value, $_updateTime);
+// log::add(__CLASS__,'error','True updateTime '.__LINE__);
+          return true;
+        }
+        return false;
+      } else if ($_cmd->getConfiguration('repeatEventManagement', 'never') == 'always') {
+        $_cmd->event($_value, $_updateTime);
+        return false; // true in the standard method checkAndUpdateCmd of the eqLogic class
+      }
+      if ($_updateTime !== false) {
+        $_cmd->setCache('collectDate', date('Y-m-d H:i:s'));
+        $this->setStatus(array('lastCommunication' => date('Y-m-d H:i:s'), 'timeout' => 0));
+      }
+      return false;
+    }
+
     /*     * **********************Getteur Setteur*************************** */
 
     /**
@@ -1156,26 +1193,30 @@ class protexiom extends eqLogic {
      * @author Fdp1
      */
     public function setStatusFromSpBrowser($forceElementUpdate=false) {
-      $myError="";
-      $statusUpdated=0;
       if (!is_object($this->_spBrowser)) {
         throw new Exception(__('Fatal error: setStatusFromSpBrowser called but $_spBrowser is not initialised.', __FILE__));
       }
+      $myError = "";
+      $statusUpdated = 0;
+      $elementUpdateRequired = 0;
       $status=$this->_spBrowser->getStatus();
       $batteryStatusChanged = 0;
-        // Parcours de toytes les cmds de la centrale pour MAJ et verif si modif
       foreach ($this->getCmd('info') as $cmd) {
         $currentLogicalId = $cmd->getLogicalId();
         $subType = $cmd->getSubType();
+          // door, link, tampered, battery_status, camera  [ ok | nok ]
+          // zone_a, zone_b, zone_c  [ on | off ]
         if($subType == 'binary') {
           $newValue=(string)preg_match("/^o[k n]$/i", $status[$cmd->getConfiguration('somfyCmd')]);
-// $this->log('debug', "  Command [$currentLogicalId] subType: $subType NewValue $newValue");
+            // more than one door can be closed/open We need to update every door.
+          if($newValue == 0 && $currentLogicalId == 'door')
+            $elementUpdateRequired = 1;
+// $this->log('debug', "Status: " .$status[$cmd->getConfiguration('somfyCmd')] ." Command [$currentLogicalId] subType: $subType NewValue: $newValue");
         }
-        else {
+        else { // gsm_signal, gsm_link, gsm_operator, alarm
           $newValue = $status[$cmd->getConfiguration('somfyCmd')];
         }
-        
-        if($this->checkAndUpdateCmd($currentLogicalId,$newValue) == true) {
+        if($this->checkAndUpdateCmdProtexiom($cmd,$newValue) == true) {
           $this->log('debug', "Command $currentLogicalId updated");
           if($currentLogicalId == "battery_status") $batteryStatusChanged = 1;
           $statusUpdated++;
@@ -1192,8 +1233,8 @@ class protexiom extends eqLogic {
       }
         // To avoid stressing the protexiom, let's not get Elements details
         // when we know for sure they are unchanged.
-      if($statusUpdated || $forceElementUpdate) {
-        $this->log('debug', "StatusUpdated:" .(($statusUpdated)?1:0) ." Force:" .(($forceElementUpdate)?1:0));
+      if($statusUpdated || $forceElementUpdate || $elementUpdateRequired) {
+        $this->log('debug', "StatusUpdated:" .(($statusUpdated)?1:0) ." Force:" .(($forceElementUpdate)?1:0)." Required:" .(($elementUpdateRequired)?1:0));
         $this->pullElements();
       }
       return;
@@ -1204,7 +1245,6 @@ class protexiom extends eqLogic {
      * @author Fdp1
      */
     public function setElementsFromSpBrowser() {
-    
       $myError="";
       if (!is_object($this->_spBrowser)) {
         throw new Exception(__('Fatal error: setElemensFromSpBrowser called but $_spBrowser is not initialised.', __FILE__));
@@ -1513,7 +1553,7 @@ class protexiomCmd extends cmd {
     $protexiom->log('debug', "Sending web request for ".$this->name." CMD");
           if($myError=$protexiom->_spBrowser->doAction($this->getConfiguration('somfyCmd'))){
           //an error occured. May be the somfy session timeout bug
-            $protexiom->log('debug', "The folowing error happened while running ".$this->name." CMD: ".$myError.". Let's workaroundSomfySessionTimeoutBug");
+            $protexiom->log('debug', "The following error happened while running ".$this->name." CMD: ".$myError.". Let's workaroundSomfySessionTimeoutBug");
             if(!$protexiom->workaroundSomfySessionTimeoutBug()){
               $myError=$protexiom->_spBrowser->doAction($this->getConfiguration('somfyCmd'));
             }
