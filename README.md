@@ -3,6 +3,7 @@
 Reprise du plugin protexiom pour Jeedom v4.2
 
 ### 14/02/2022
+- Jeedom v4.0 minimum pour cette version 2.0.0 du plugin
 - Corrections des templates dashboard
 - Paramétres équipement et commandes dans des onglets différents.
 - Ajout de la zone dans le titre des équipements.
