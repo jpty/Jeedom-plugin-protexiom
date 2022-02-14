@@ -156,7 +156,7 @@ class protexiom_ctrl extends eqLogic {
 			$ctrlCmd->save();
 			
 		}else{
-			$this->log('error', $_deviceType.' is an unknown type of device '.$this->getName());
+			$this->log('error', $_deviceType.' is an unknown type for device '.$this->getName());
 		}
 
 	}//End postInsert func
