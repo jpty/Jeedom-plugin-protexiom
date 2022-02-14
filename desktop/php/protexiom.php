@@ -198,7 +198,7 @@ foreach ($eqLogics as $eqLogic) {
                 <div class="form-group">
                     <label class="col-sm-3 control-label" >{{SSL Enabled}}</label>
                     <div class="col-sm-7">
-                        <input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="SSLEnabled" placeholder="{{SSL Enabled}}" size="16" checked/>
+                        <input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="SSLEnabled" placeholder="{{SSL Enabled}}" size="16"/>
 									{{SSL NON SUPPORTE. Ne pas activer.}}
                     </div>
                 </div>

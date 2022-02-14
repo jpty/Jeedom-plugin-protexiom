@@ -29,7 +29,6 @@ if (!isConnect()) {
                  {{Intervalle (en secondes) de mise à jour de l'état.}}<br/>
                  {{Valeur minimum: 5 secondes.}}<br/>
                  {{Valeur recommandée: 10 secondes}}<br/>
-                 {{Exemple}}: 10
              </div>
          </div>
          
