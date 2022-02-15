@@ -4,7 +4,7 @@
 "licence" : "WFTPL",
 "author" : "Fdp1",
 "installation" : "Aucune",
-"require" : "4.2",
+"require" : "4.0",
 "version" : "2.0.0",
 "category" : "security",
 "hasOwnDeamon" : true,
