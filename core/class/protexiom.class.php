@@ -1231,6 +1231,7 @@ class protexiom extends eqLogic {
         $this->batteryStatus($newValue);
         $statusUpdated++;
       }
+// $this->batteryStatus('10'); $statusUpdated++; // DEBUG_PILES
         // To avoid stressing the protexiom, let's not get Elements details
         // when we know for sure they are unchanged.
       if($statusUpdated || $forceElementUpdate || $elementUpdateRequired) {
@@ -1404,7 +1405,7 @@ class protexiom extends eqLogic {
               $newValue=$element[$cmd->getLogicalId()];
             }
                
-            if(!($cmd->execCmd(null, 2)==$newValue)){//Changed value
+            if(!($cmd->execCmd(null, 2)==$newValue)) { // Changed value
               //We just ran execCmd, wich set $_collectDate
               //Event() will check if $_collectDate is old, and reject the event if it's the case.
               //Let's clear it before throwing the event
@@ -1414,17 +1415,17 @@ class protexiom extends eqLogic {
               // Battery level is a specific info handle by Jeedom in a specific way.
               // For Jeedom, 10% means low battery
               if($cmd->getLogicalId()=="battery"){
-                if(preg_match("/^([0]|[0-9 a-z]*nok)$/i", $element[$cmd->getLogicalId()])){
+                if(preg_match("/^([0]|[0-9 a-z]*nok)$/i", $element[$cmd->getLogicalId()])) {
                   $eqLogic->batteryStatus('10');
                 }else{
                   $eqLogic->batteryStatus('100');
                 }
               }
-                
-            }// else, unchanged value. Let's keep the cached one
-          }//End of cmd iteration
-        }// else eqLogic is NOT enabled
-      }//End of elements iteration
+            } // else, unchanged value. Let's keep the cached one
+// $eqLogic->batteryStatus('10'); // DEBUG_PILES
+          } // End of cmd iteration
+        } // else eqLogic is NOT enabled
+      } // End of elements iteration
     
       return;
     }//End function setElementsFromSpBrowser

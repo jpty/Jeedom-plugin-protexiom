@@ -140,9 +140,9 @@ foreach ($eqLogics as $eqLogic) {
               <legend><i class="fas fa-wrench"></i> {{Paramètres généraux}}</legend>
                 <div class="form-group">
                   <div class="col-sm-7">
-                    <input id="logicalId" type="hidden" disabled class="eqLogicAttr form-control" data-l1key="logicalId"/>
-                    <input id="eqType_name" type="hidden" disabled class="eqLogicAttr form-control" data-l1key="eqType_name"/>
-                    <input type="hidden" disabled class="eqLogicAttr form-control" data-l1key="configuration"  data-l2key="item_type"/>
+                    <input id="logicalId" type="hidden" class="eqLogicAttr form-control" data-l1key="logicalId"/>
+                    <input id="eqType_name" type="hidden" class="eqLogicAttr form-control" data-l1key="eqType_name"/>
+                    <input type="hidden" class="eqLogicAttr form-control" data-l1key="configuration"  data-l2key="item_type"/>
                   </div>
                 </div>
                 <div class="form-group">
@@ -254,31 +254,13 @@ foreach ($eqLogics as $eqLogic) {
               <div class="form-group">
                 <label class="col-sm-3 control-label">{{Zone}}<br></label>
                 <div class="col-sm-7">
-                  <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="item_zone" disabled/>
+                  <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="item_zone" readonly/>
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-3 control-label">{{Label Somfy}}<br></label>
                 <div class="col-sm-7">
-                  <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="item_label" disabled/>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="col-sm-3 control-label">{{Type Somfy}}<br></label>
-                <div class="col-sm-7">
-                  <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="item_type" disabled/>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="col-sm-3 control-label">{{Date création}}<br></label>
-                <div class="col-sm-7">
-                  <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="createtime" disabled/>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="col-sm-3 control-label">{{Date batterie}}<br></label>
-                <div class="col-sm-7">
-                  <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="batterytime" disabled/>
+                  <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="item_label" readonly/>
                 </div>
               </div>
               <div id="ProtexiomHardwareVersion" class="form-group">
