@@ -14,7 +14,7 @@
  */
 
 /* * ***************************Includes********************************* */
-require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
+require_once __DIR__ . '/../../../../core/php/core.inc.php';
 
 class protexiom_ctrl extends eqLogic {
     /*     * *************************Attributs****************************** */
@@ -123,7 +123,7 @@ class protexiom_ctrl extends eqLogic {
 			$ctrlCmd->setConfiguration('somfyCmd', 'SHUTTER_UP');
 			$ctrlCmd->setType('action');
 			$ctrlCmd->setSubType('other');
-			$ctrlCmd->setDisplay('icon', '<i class="fa fa-chevron-up"></i>');
+			$ctrlCmd->setDisplay('icon', '<i class="fas fa-chevron-up"></i>');
 			$ctrlCmd->setDisplay('generic_type','FLAP_UP');
 			$ctrlCmd->setIsVisible(1);
 			$ctrlCmd->setOrder(1);
@@ -136,7 +136,7 @@ class protexiom_ctrl extends eqLogic {
 			$ctrlCmd->setConfiguration('somfyCmd', 'SHUTTER_STOP');
 			$ctrlCmd->setType('action');
 			$ctrlCmd->setSubType('other');
-			$ctrlCmd->setDisplay('icon', '<i class="fa fa-stop"></i>');
+			$ctrlCmd->setDisplay('icon', '<i class="fas fa-stop"></i>');
 			$ctrlCmd->setDisplay('generic_type','FLAP_STOP');
 			$ctrlCmd->setIsVisible(1);
 			$ctrlCmd->setOrder(2);
@@ -149,14 +149,14 @@ class protexiom_ctrl extends eqLogic {
 			$ctrlCmd->setConfiguration('somfyCmd', 'SHUTTER_DOWN');
 			$ctrlCmd->setType('action');
 			$ctrlCmd->setSubType('other');
-			$ctrlCmd->setDisplay('icon', '<i class="fa fa-chevron-down"></i>');
+			$ctrlCmd->setDisplay('icon', '<i class="fas fa-chevron-down"></i>');
 			$ctrlCmd->setDisplay('generic_type','FLAP_DOWN');
 			$ctrlCmd->setIsVisible(1);
 			$ctrlCmd->setOrder(3);
 			$ctrlCmd->save();
 			
 		}else{
-			$this->log('error', $_deviceType.' is an unknow type for device '.$this->getName());
+			$this->log('error', $_deviceType.' is an unknown type for device '.$this->getName());
 		}
 
 	}//End postInsert func

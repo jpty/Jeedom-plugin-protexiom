@@ -503,7 +503,7 @@ class phpProtexiom {
 				if(preg_replace('/^\//', "", $response['responseHeaders']['Location'])==preg_replace('/^\//', "", $this->hwParam['URL']['Error'])){
 					$myError="Somfy protexiom returned : ".$this->getSomfyError();
 				}elseif(preg_replace('/^\//', "", !$response['responseHeaders']['Location'])==preg_replace('/^\//', "", $location)){
-					$myError="Unknow error (HTTP return code: 302 and Location: ".$response['responseHeaders']['Location'].")";
+					$myError="Unknown error (HTTP return code: 302 and Location: ".$response['responseHeaders']['Location'].")";
 				}//else we got the Location. $myError=""
 			}
 		}elseif($response['returnCode']=='1'){
@@ -515,10 +515,10 @@ class phpProtexiom {
 				if(preg_replace('/^\//', "", $response['responseHeaders']['Location'])==preg_replace('/^\//', "", $this->hwParam['URL']['Error'])){
 					$myError="Somfy protexiom returned : ".$this->getSomfyError();					
 				}else{
-					$myError="Unknow error (HTTP return code: 302 and Location: ".$response['responseHeaders']['Location'].")";
+					$myError="Unknown error (HTTP return code: 302 and Location: ".$response['responseHeaders']['Location'].")";
 				}
 			}else{
-				$myError="Unknow error (HTTP return code ".$response['returnCode'].")";
+				$myError="Unknown error (HTTP return code ".$response['returnCode'].")";
 			}
 		}
 		return $myError;
@@ -641,12 +641,12 @@ class phpProtexiom {
 	function pullStatus()
 	{
 		$sessionHandling = false;
-		$myError="";
+		$myError = "";
 		
 		if(!$this->authCookie){
 			//Not logged in. Let's log in now, and set a variable to enable logout before exit
 			$sessionHandling = true;
-			$myError=$this->doLogin();
+			$myError = $this->doLogin();
 		}
 		
 		if(!$myError){//Login OK
@@ -655,20 +655,27 @@ class phpProtexiom {
 				$this->doLogout();
 			}
 			if(!$myError=$this->isWgetError($response, '200')){
-				$xmlStatus=simplexml_load_string($response['responseBody']);
-				foreach($this->hwParam['StatusTag'] as $key => $val){
-					if($key=="GSM_OPERATOR"){
-						//For some odd reason, Somfy add a " in front of the operator name
-						//Let's remove it*/
-						$this->status[$key]=preg_replace('/^"/', "", (string)$xmlStatus->$val);
-					}else{
-						$this->status[$key]=(string)$xmlStatus->$val;
+$fp = fopen(__DIR__ .'/../../data/SomfyPullStatus-' .$response['returnCode'] .'.xml','w');
+fwrite($fp,"" .print_r($response['responseBody'],true) ."\n");
+fclose($fp);
+
+				$xmlStatus = simplexml_load_string($response['responseBody']);
+				foreach($this->hwParam['StatusTag'] as $key => $val) {
+          if($key == "GSM_LINK"){
+            // GSM connectÃ© au rÃ©seau ==> GSM connecté au réseau
+						$this->status[$key] = str_replace('Ã©', 'é', $xmlStatus->$val);
+          }
+          else if($key == "GSM_OPERATOR") {
+						// For some odd reason, Somfy add a " in front of the operator name
+						// Let's remove it
+						$this->status[$key] = preg_replace('/^"/', "", (string)$xmlStatus->$val);
+					} else {
+						$this->status[$key] = (string)$xmlStatus->$val;
 					}
 				}
-				$this->status['LastRefresh']=date("Y-m-d H:i:s");
+				$this->status['LastRefresh'] = date("Y-m-d H:i:s");
 			}//else: $myerror should be returned
 		}
-		
 		return $myError;	
 	}//End pullStatus func
 	
@@ -683,20 +690,23 @@ class phpProtexiom {
 	function pullElements()
 	{
 		$sessionHandling = false;
-		$myError="";
+		$myError = "";
 		
 		if(!$this->authCookie){
 			//Not logged in. Let's log in now, and set a variable to enable logout before exit
 			$sessionHandling = true;
-			$myError=$this->doLogin();
+			$myError = $this->doLogin();
 		}
 		
 		if(!$myError){//Login OK
-			$response=$this->somfyWget($this->hwParam['URL']['ListElements'], "GET");
+			$response = $this->somfyWget($this->hwParam['URL']['ListElements'], "GET");
 			if($sessionHandling){
 				$this->doLogout();
 			}
 			if(!$myError=$this->isWgetError($response, '200')){
+$fp = fopen(__DIR__ .'/../../data/SomfyPullElements-' .$response['returnCode'] .'.html','w');
+fwrite($fp,"" .print_r($response['responseBody'],true) ."\n");
+fclose($fp);
 				if(preg_match_all($this->hwParam['Pattern']['ListeElmt']['Type'], $response['responseBody'], $types_str, PREG_SET_ORDER)!=1){
 					$myError.="item_type not found";
 				}elseif(preg_match_all($this->hwParam['Pattern']['ListeElmt']['Label'], $response['responseBody'], $labels_str, PREG_SET_ORDER)!=1){
@@ -802,7 +812,6 @@ class phpProtexiom {
 				}
 			}//else: $myerror should be returned
 		}
-		
 		return $myError;	
 	}//End pullElements func
 	

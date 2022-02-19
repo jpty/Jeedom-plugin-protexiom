@@ -4,12 +4,11 @@
         <span style="font-size: 2em;margin-top: 5px;" id="iconCmd#uid#"></span>
     </center>
     <script>
-        if ('#state#' == '0' || '#state#' == 0) {
-            $('#iconCmd#uid#').addClass('fas fa-cube');
-        }
         if ('#state#' == '1' || '#state#' == 1) {
-            $('#iconCmd#uid#').addClass('fab fa-dropbox text-danger');
-            $('#iconCmd#uid#').css({ "color": "#a94444" });
+            $('#iconCmd#uid#').addClass('fa fa-pause');
+        }
+        if ('#state#' == '0' || '#state#' == 0) {
+            $('#iconCmd#uid#').addClass('fa fa-play');
         }
     </script>
 </div>

@@ -1,41 +1,45 @@
-<div style="width:62px;min-height:62px;" class="cmd #history# tooltips cmd-widget" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#">
-  <center>
-    <span style="font-weight: 400;font-size : 12px;" class='cmdName'>#name#<br/></span>
-    <span style="font-size: 2em;" class="iconCmd#id#"></span>
-  </center>
-    
+<div class="cmd cmd-widget #history#" data-type="info" data-subtype="binary" data-template="custom" data-cmd_id="#id#" data-cmd_uid="#uid#" data-version="#version#">
+  <div class="title #hide_name#">
+    <div class="cmdName">#name_display#</div>
+  </div>
+  <div class="content-sm">
+    <span class="iconCmd fa-stack fa-2x"></span>
+  </div>
+  <template></template>
   <script>
-    var sigStrength;
-      // calcul du pourcentage du signal par rapport à  la valeur max
-    if(isNaN('#state#')){
-      sigStrength = 0;
-    } else {
-      sigStrength = ( parseInt('#state#') * 100 ) / #maxValue#; 
+    jeedom.cmd.update['#id#'] =function(_options) {
+      var cmd = $('.cmd[data-cmd_id=#id#]')
+
+      var sigStrength;
+        // calcul du pourcentage du signal par rapport à  la valeur max
+      if(isNaN(_options.display_value)) sigStrength = 0;
+      else sigStrength = ( parseInt(_options.display_value) * 100 ) / #maxValue#; 
+
+      if (sigStrength >=0 && sigStrength <= 10) {
+        cmd.find('.iconCmd').empty().append("<i style='font-size:24px;margin-top: 8px' class='fas jeedom2-fdp1-signal0 fa-stack-1x'></i><i style='font-size: 36px' class='fas fa-exclamation fa-stack-2x icon_red'></i>")
+        cmd.attr('title', 'Pas de signal GSM - '+_options.collectDate +'<br>Val: '+_options.valueDate)
+      }
+      else if (sigStrength > 10 && sigStrength <= 30) {
+        cmd.find('.iconCmd').empty().append("<i class='fas jeedom2-fdp1-signal1 icon_red'></i>")
+        cmd.attr('title', 'Signal: 1 - '+_options.collectDate)
+      }
+      else if (sigStrength > 30 && sigStrength <= 50) {
+        cmd.find('.iconCmd').empty().append("<i class='fas jeedom2-fdp1-signal02'></i>")
+        cmd.attr('title', 'Signal: 2 - '+_options.collectDate)
+      }
+      else if (sigStrength > 50 && sigStrength <= 70) {
+        cmd.find('.iconCmd').empty().append("<i class='fas jeedom2-fdp1-signal3'></i>")
+        cmd.attr('title', 'Signal: 3 - '+_options.collectDate)
+      }
+      else if (sigStrength > 70 && sigStrength <= 90) {
+        cmd.find('.iconCmd').empty().append("<i class='fas jeedom2-fdp1-signal4'></i>")
+        cmd.attr('title', 'Signal: 4 - '+_options.collectDate)
+      }
+      else if (sigStrength > 90 && sigStrength <= 100) {
+        cmd.find('.iconCmd').empty().append("<i class='fas jeedom2-fdp1-signal5'></i>")
+        cmd.attr('title', 'Signal: 5 - '+_options.collectDate)
+      }
     }
-   
-    if (sigStrength >=0 && sigStrength <= 10) {
-      $('.iconCmd#id#').append('<i class="icon jeedom2-fdp1-signal0"></i>');
-      $('.cmd[data-cmd_id=#id#]').attr('title', 'Signal: #state# -  #collectDate#');
-    }
-    if (sigStrength > 10 && sigStrength <= 30) {
-      $('.iconCmd#id#').append('<i class="icon jeedom2-fdp1-signal1"></i>');
-      $('.cmd[data-cmd_id=#id#]').attr('title', 'Signal: #state# -  #collectDate#');
-    }
-    if (sigStrength > 30 && sigStrength <= 50) {
-      $('.iconCmd#id#').append('<i class="icon jeedom2-fdp1-signal02"></i>');
-      $('.cmd[data-cmd_id=#id#]').attr('title', 'Signal: #state# -  #collectDate#');
-    }
-    if (sigStrength > 50 && sigStrength <= 70) {
-      $('.iconCmd#id#').append('<i class="icon jeedom2-fdp1-signal3"></i>');
-      $('.cmd[data-cmd_id=#id#]').attr('title', 'Signal: #state# -  #collectDate#');
-    }
-    if (sigStrength > 70 && sigStrength <= 90) {
-      $('.iconCmd#id#').append('<i class="icon jeedom2-fdp1-signal4"></i>');
-      $('.cmd[data-cmd_id=#id#]').attr('title', 'Signal: #state# -  #collectDate#');
-    }
-    if (sigStrength > 90 && sigStrength <= 100) {
-      $('.iconCmd#id#').append('<i class="icon jeedom2-fdp1-signal5"></i>');
-      $('.cmd[data-cmd_id=#id#]').attr('title', 'Signal: #state# -  #collectDate#');
-    }
+    jeedom.cmd.update['#id#']({display_value: '#state#', valueDate: '#valueDate#', collectDate: '#collectDate#'})
   </script>
 </div>

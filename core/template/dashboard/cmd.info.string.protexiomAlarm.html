@@ -1,31 +1,32 @@
-<div style="width:90px;min-height:62px;" class="cmd #history# tooltips cmd-widget" data-type="info" data-subtype="string" data-cmd_id="#id#" title="#collectDate#">
-  <center>
-    <span style="font-weight: 400;font-size : 12px;" class='cmdName'>#name#<br/></span>
-    <span class="fa-stack fa-2x">
-      <i class="iconCmd#id#"></i>
-      <i class="icon2Cmd#id#"></i>
-      <i class="icon3Cmd#id#"></i>
-    </span>
-  </center>
-
+<div class="cmd cmd-widget #history#" data-type="info" data-subtype="binary" data-template="custom" data-cmd_id="#id#" data-cmd_uid="#uid#" data-version="#version#">
+  <div class="title #hide_name#">
+    <div class="cmdName">#name_display#</div>
+  </div>
+  <div class="content-sm">
+    <span class="iconCmd fa-stack fa-2x"></span>
+  </div>
+  <template></template>
   <script>
-    if ('#state#' == 'ok') {
-      $('.iconCmd#id#').addClass('fas fa-home fa-2x fa-stack-1x')
-      $('.icon2Cmd#id#').addClass('fas fa-check text-success fa-1x fa-stack-1x pull-right');
-      $('.cmd[data-cmd_id=#id#]').attr('title', 'Pas d\'alarme  -  #collectDate#');
+    jeedom.cmd.update['#id#'] =function(_options) {
+      var cmd = $('.cmd[data-cmd_id=#id#]')
+
+      if (_options.display_value == 'ok') {
+        cmd.find('.iconCmd').empty().append("<i style='font-size:2em' class='fas fa-home fa-stack-1x'></i><i class='fas fa-check fa-stack-1x text-success'></i>")
+        cmd.attr('title', 'Pas d\'alarme - '+_options.collectDate)
+      }
+      else if (_options.display_value == 'nok_int') {
+        cmd.find('.iconCmd').empty().append("<i style='font-size:2em' class='fas fa-home fa-2x fa-stack-2x'></i><i style='font-size:2em' class='fas jeedom-mouvement fa-2x fa-stack-2x text-danger'></i>")
+        cmd.attr('title', 'Alarme intrusion - '+_options.collectDate)
+      }
+      else if (_options.display_value == 'nok_dom') {
+        cmd.find('.iconCmd').empty().append("<i style='font-size:2em' class='fas fa-home fa-2x fa-stack-2x'></i><i style='color: #1b7ae4' class='fas nature-drops1 fa-1x fa-stack-1x'></i><i style='color: #ff8b00;margin-top:7px' class='fas fa-fire fa-stack-1x'></i>")
+        cmd.attr('title', 'Alarme domestique - '+_options.collectDate)
+      }
+      else {
+        cmd.find('.iconCmd').empty().append("<i class='fas fa-question'>");
+        cmd.attr('title', _options.display_value +' - ' +_options.collectDate)
+      }
     }
-    if ('#state#' == 'nok_int') {
-      $('.iconCmd#id#').addClass('fas fa-home fa-2x fa-stack-1x');
-      $('.icon2Cmd#id#').addClass('fas icon jeedom-mouvement text-danger fa-2x fa-stack-2x');
-      $('.cmd[data-cmd_id=#id#]').attr('title', 'Alarme Intrusion  -  #collectDate#');
-    }
-    if ('#state#' == 'nok_dom') {
-      $('.iconCmd#id#').addClass('fas fa-home fa-2x fa-stack-1x');
-      $('.icon2Cmd#id#').addClass('fas fa-fire  fa-stack-1x pull-right');
-      $('.icon2Cmd#id#').css({ "color": "#ff8000" });
-      $('.icon3Cmd#id#').addClass('fas nature-drops1 fa-stack-1x');
-      $('.icon3Cmd#id#').css({ "color": "#1b7ae4" });
-      $('.cmd[data-cmd_id=#id#]').attr('title', 'Alarme domestique  -  #collectDate#');
-    }
+    jeedom.cmd.update['#id#']({display_value: '#state#', valueDate: '#valueDate#', collectDate: '#collectDate#'})
   </script>
 </div>
