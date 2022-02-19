@@ -23,7 +23,7 @@ if (!is_object($eqLogic)) {
 }
 ?>
 <div id="div_protexiomTree">
-<h3>Status de l'élément:</h3>
+<h3>Etat de l'élément:</h3>
 <?php 
 echo("<b>LogicalID: </b>".$eqLogic->getLogicalId()."<br>");
 echo("<b>ID: </b>".substr($eqLogic->getLogicalId(), strpos($eqLogic->getLogicalId(),"-")+1)."<br>");

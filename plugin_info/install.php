@@ -34,6 +34,138 @@ function protexiom_install() {
 	}
 }
 
+function protexiomUpdateToVersion2() {
+  // update protexion templates name if unchanged since installation
+	foreach (eqLogic::byType('protexiom') as $eqLogic) {
+		foreach ($eqLogic->getCmd() as $cmd) {
+      switch($cmd->getName()) {
+        case 'zoneabc_on':
+        case 'zonea_on':
+        case 'zoneb_on':
+        case 'zonec_on':
+        case 'zoneabc_off':
+        case 'reset_alarm_err':
+        case 'reset_battery_err':
+        case 'reset_link_err':
+          if($cmd->getTemplate('dashboard') == 'protexiomDefault')
+            $cmd->setTemplate('dashboard', 'protexiom::protexiomDefault');
+          if($cmd->getTemplate('mobile') == 'protexiomDefault')
+            $cmd->setTemplate('mobile', 'protexiom::protexiomDefault');
+          break;
+        case 'zone_a':
+        case 'zone_b':
+        case 'zone_c':
+          if($cmd->getTemplate('dashboard') == 'protexiomZone')
+            $cmd->setTemplate('dashboard', 'protexiom::protexiomZone');
+          if($cmd->getTemplate('mobile') == 'protexiomZone')
+            $cmd->setTemplate('mobile', 'protexiom::protexiomZone');
+          break;
+        case 'battery_status':
+          if($cmd->getTemplate('dashboard') == 'protexiomBattery')
+            $cmd->setTemplate('dashboard', 'protexiom::protexiomBattery');
+          if($cmd->getTemplate('mobile') == 'protexiomBattery')
+            $cmd->setTemplate('mobile', 'protexiom::protexiomBattery');
+          break;
+        case 'link':
+          if($cmd->getTemplate('dashboard') == 'protexiomLink')
+            $cmd->setTemplate('dashboard', 'protexiom::protexiomLink');
+          if($cmd->getTemplate('mobile') == 'protexiomLink')
+            $cmd->setTemplate('mobile', 'protexiom::protexiomLink');
+          break;
+        case 'door':
+          if($cmd->getTemplate('dashboard') == 'protexiomDoor')
+            $cmd->setTemplate('dashboard', 'protexiom::protexiomDoor');
+          if($cmd->getTemplate('mobile') == 'protexiomDoor')
+            $cmd->setTemplate('mobile', 'protexiom::protexiomDoor');
+          break;
+        case 'alarm':
+          if($cmd->getTemplate('dashboard') == 'protexiomAlarm')
+            $cmd->setTemplate('dashboard', 'protexiom::protexiomAlarm');
+          if($cmd->getTemplate('mobile') == 'protexiomAlarm')
+            $cmd->setTemplate('mobile', 'protexiom::protexiomAlarm');
+          break;
+        case 'tampered':
+          if($cmd->getTemplate('dashboard') == 'protexiomTampered')
+            $cmd->setTemplate('dashboard', 'protexiom::protexiomTampered');
+          if($cmd->getTemplate('mobile') == 'protexiomTampered')
+            $cmd->setTemplate('mobile', 'protexiom::protexiomTampered');
+          break;
+        case 'gsm_link':
+        case 'gsm_operator':
+          if($cmd->getTemplate('dashboard') == 'protexiomDefault')
+            $cmd->setTemplate('dashboard', '');
+          if($cmd->getTemplate('mobile') == 'protexiomDefault')
+            $cmd->setTemplate('mobile', '');
+          break;
+        case 'gsm_signal':
+          if($cmd->getTemplate('dashboard') == 'protexiomGsmSignal')
+            $cmd->setTemplate('dashboard', 'protexiom::protexiomGsmSignal');
+          if($cmd->getTemplate('mobile') == 'protexiomGsmSignal')
+            $cmd->setTemplate('mobile', 'protexiom::protexiomGsmSignal');
+          break;
+        case 'camera':
+          if($cmd->getTemplate('dashboard') == 'protexiomCamera')
+            $cmd->setTemplate('dashboard', 'protexiom::protexiomCamera');
+          if($cmd->getTemplate('mobile') == 'protexiomCamera')
+            $cmd->setTemplate('mobile', 'protexiom::protexiomCamera');
+          break;
+    
+      }
+    }
+  }
+  // update protexiom_elmt templates name if unchanged since previous installation
+	foreach (eqLogic::byType('protexiom_elmt') as $eqLogic) {
+		foreach ($eqLogic->getCmd() as $cmd) {
+      switch($cmd->getName()) {
+        case 'pause':
+          if($cmd->getTemplate('dashboard') == 'protexiomElmtPause')
+            $cmd->setTemplate('dashboard', 'protexiom::protexiomElmtPause');
+          if($cmd->getTemplate('mobile') == 'protexiomElmtPause')
+            $cmd->setTemplate('mobile', 'protexiom::protexiomElmtPause');
+          break;
+        case 'battery':
+          if($cmd->getTemplate('dashboard') == 'protexiomElmtBattery')
+            $cmd->setTemplate('dashboard', 'protexiom::protexiomElmtBattery');
+          if($cmd->getTemplate('mobile') == 'protexiomElmtBattery')
+            $cmd->setTemplate('mobile', 'protexiom::protexiomElmtBattery');
+          break;
+        case 'tampered':
+          if($cmd->getTemplate('dashboard') == 'protexiomElmtTampered')
+            $cmd->setTemplate('dashboard', 'protexiom::protexiomElmtTampered');
+          if($cmd->getTemplate('mobile') == 'protexiomElmtTampered')
+            $cmd->setTemplate('mobile', 'protexiom::protexiomElmtTampered');
+          break;
+        case 'alarm':
+          if($cmd->getTemplate('dashboard') == 'protexiomAlarm')
+            $cmd->setTemplate('dashboard', 'protexiom::protexiomAlarm');
+          if($cmd->getTemplate('mobile') == 'protexiomAlarm')
+            $cmd->setTemplate('mobile', 'protexiom::protexiomAlarm');
+          break;
+        case 'link':
+          if($cmd->getTemplate('dashboard') == 'protexiomElmtLink')
+            $cmd->setTemplate('dashboard', 'protexiom::protexiomElmtLink');
+          if($cmd->getTemplate('mobile') == 'protexiomElmtLink')
+            $cmd->setTemplate('mobile', 'protexiom::protexiomElmtLink');
+          break;
+        case 'door':
+          if($eqLogic->getConfiguration('item_type')=='typedogarage') {
+            if($cmd->getTemplate('dashboard') == 'protexiomElmtGarage')
+              $cmd->setTemplate('dashboard', 'protexiom::protexiomElmtGarage');
+            if($cmd->getTemplate('mobile') == 'protexiomElmtGarage')
+              $cmd->setTemplate('mobile', 'protexiom::protexiomElmtGarage');
+          }
+          else {
+            if($cmd->getTemplate('dashboard') == 'protexiomElmtDoor')
+              $cmd->setTemplate('dashboard', 'protexiom::protexiomElmtDoor');
+            if($cmd->getTemplate('mobile') == 'protexiomElmtDoor')
+              $cmd->setTemplate('mobile', 'protexiom::protexiomElmtDoor');
+          }
+          break;
+      }
+    }
+  }
+}
+
 function protexiom_update() {
 	log::add('protexiom', 'info', '[*-*] '.getmypid().' Running protexiom post-update script', 'Protexiom');
 	//Loading default configuration value
@@ -146,7 +278,7 @@ function protexiom_update() {
 		//Let's remove battery cmd, as this is now handled with Jeedom standard
 		$cmd=$eqLogic->getCmd('info', 'battery');
 		if (is_object($cmd)) {
-			message::add('protexiom', 'Somfy alarme: La commande d\'info "'.$cmd->getName().'" a �t� supprim�e. Le niveau de batterie est maintenant g�r� au standard Jeedom (getConfiguration(batteryStatus)).', '', 'Protexiom');
+			message::add('protexiom', 'Somfy alarme: La commande d\'info "'.$cmd->getName().'" a été supprimée. Le niveau de batterie est maintenant géré au standard Jeedom (getConfiguration(batteryStatus)).', '', 'Protexiom');
 			$cmd->remove();
 		}
 		/*
@@ -237,7 +369,7 @@ function protexiom_update() {
 	    if (is_object($cmd)) {
             log::add('protexiom', 'info', '[*-*] '.getmypid().' removing needs_reboot cmd for '.$cmd->getName(), 'Protexiom');
             $cmd->remove();
-            message::add('protexiom', 'Somfy alarme '.$eqLogic->getName().': La commande d\'info "'.$cmd->getName().'" a été supprimée. La stabilit� du plugin est maintenant optimale, et cette commande devenue inutile avait �t� inhib�e depuis plusieurs mois. Si cette commande est utilisée dans des scenarios, vous devez les supprimer.', '', 'Protexiom');
+            message::add('protexiom', 'Somfy alarme '.$eqLogic->getName().': La commande d\'info "'.$cmd->getName().'" a été supprimée. La stabilité du plugin est maintenant optimale, et cette commande devenue inutile avait été inhibée depuis plusieurs mois. Si cette commande est utilisée dans des scénarios, vous devez les supprimer.', '', 'Protexiom');
         }
         /*
          * Upgrade to v1.1.0 & v1.1.1
@@ -370,28 +502,27 @@ function protexiom_update() {
 	foreach (eqLogic::byType('protexiom_ctrl') as $eqLogic) {
 		foreach ($eqLogic->getCmd() as $cmd) {
 			if($cmd->getDisplay('generic_type')==''){
-				switch($cmd->getLogicalId())
-				{
+				switch($cmd->getLogicalId()) {
 					case 'light_on';
-					$cmd->setDisplay('generic_type','LIGHT_ON');
-					$cmd->save();
-					break;
+            $cmd->setDisplay('generic_type','LIGHT_ON');
+            $cmd->save();
+            break;
 					case 'light_off';
-					$cmd->setDisplay('generic_type','LIGHT_OFF');
-					$cmd->save();
-					break;
+            $cmd->setDisplay('generic_type','LIGHT_OFF');
+            $cmd->save();
+            break;
 					case 'shutter_up';
-					$cmd->setDisplay('generic_type','FLAP_UP');
-					$cmd->save();
-					break;
+            $cmd->setDisplay('generic_type','FLAP_UP');
+            $cmd->save();
+            break;
 					case 'shutter_stop';
-					$cmd->setDisplay('generic_type','FLAP_STOP');
-					$cmd->save();
-					break;
+            $cmd->setDisplay('generic_type','FLAP_STOP');
+            $cmd->save();
+            break;
 					case 'shutter_down';
-					$cmd->setDisplay('generic_type','FLAP_DOWN');
-					$cmd->save();
-					break;
+            $cmd->setDisplay('generic_type','FLAP_DOWN');
+            $cmd->save();
+            break;
 				}
 			}
 		}
@@ -399,8 +530,7 @@ function protexiom_update() {
 	foreach (eqLogic::byType('protexiom_elmt') as $eqLogic) {
 		foreach ($eqLogic->getCmd() as $cmd) {
 			if($cmd->getDisplay('generic_type')==''){
-				switch($cmd->getLogicalId())
-				{
+				switch($cmd->getLogicalId()) {
 					case "battery":
 						$cmd->setDisplay('generic_type','BATTERY');
 						$cmd->save();
@@ -409,7 +539,7 @@ function protexiom_update() {
 						$cmd->setDisplay('generic_type','SABOTAGE');
 						$cmd->setDisplay('invertBinary','1');
 						$cmd->save();
-						message::add('protexiom', 'Plugin Somfy alarme: Pour des raisons de compatibilité avec l\'appli mobile, l\'affichage des commandes tampered des détécteurs (sabotage) est maintenant inversé. Si vous utilisez des widgets personnalisés, vous devez les modifier en conséquence. Les valeurs récupérées dans les scénarios restent inchangées.', '', 'Protexiom');
+						message::add('protexiom', 'Plugin Somfy alarme: Pour des raisons de compatibilité avec l\'appli mobile, l\'affichage des commandes tampered des détecteurs (sabotage) est maintenant inversé. Si vous utilisez des widgets personnalisés, vous devez les modifier en conséquence. Les valeurs récupérées dans les scénarios restent inchangées.', '', 'Protexiom');
 						break;
 					case "alarm":
 						if($eqLogic->getConfiguration('item_type')=='typedm'){
@@ -431,6 +561,8 @@ function protexiom_update() {
 	if(config::byKey('subClass', 'protexiom', '')==''){
 		config::save('subClass', config::getDefaultConfiguration('protexiom')['protexiom']['subClass'], 'protexiom');
 	}
+
+  protexiomUpdateToVersion2();
 	
 	/*
 	 * End of version spécific upgrade actions. Let's run standard actions

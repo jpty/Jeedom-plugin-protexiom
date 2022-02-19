@@ -13,7 +13,7 @@
 * http://www.wtfpl.net/ for more details.
 */
 
-require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
+require_once __DIR__ . '/../../../core/php/core.inc.php';
 include_file('core', 'authentification', 'php');
 if (!isConnect()) {
     include_file('desktop', '404', 'php');
@@ -23,13 +23,12 @@ if (!isConnect()) {
  <form class="form-horizontal">
      <fieldset>
          <div class="form-group">
-             <label class="col-sm-5 control-label">{{Interval de mise à jour}}</label>
+             <label class="col-sm-5 control-label">{{Intervalle de mise à jour}}</label>
              <div class="col-sm-5">
                  <input class="configKey form-control" data-l1key="pollInt" />
-                 {{Interval (en secondes) de mise à jour de l'etat.}}<br/>
+                 {{Intervalle (en secondes) de mise à jour de l'état.}}<br/>
                  {{Valeur minimum: 5 secondes.}}<br/>
                  {{Valeur recommandée: 10 secondes}}<br/>
-                 {{Exemple}}: 10
              </div>
          </div>
          
