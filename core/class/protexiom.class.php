@@ -99,21 +99,20 @@ class protexiom extends eqLogic {
       $return['log'] = '';
       $return['state'] = 'nok';
       $return['launchable'] = 'nok';
-      $return['launchable_message'] = __('Vous devez disposer d\'au moins un equipement "alarme protexiom" actif pour que le demon puisse être lancé.', __FILE__);
+      $return['launchable_message'] = __('Vous devez disposer d\'au moins un équipement "Alarme Protexiom" actif pour que le daemon puisse être lancé.', __FILE__);
       $cron = cron::byClassAndFunction(__CLASS__, 'pull');
       if (is_object($cron) && $cron->running()) {
         $return['state'] = 'ok';
       }
-      //Daemon is Launchable only if at least one eqLogic is enabled
+      // Daemon is Launchable only if at least one eqLogic is enabled
       foreach (eqLogic::byType(__CLASS__) as $eqLogic) {
         if($eqLogic->getIsEnable()){
           $return['launchable'] = 'ok';
           $return['launchable_message'] = '';
         }
       }
-      
       return $return;
-    }//end deamon_info function
+    } // end deamon_info function
     
     /**
      * automatically called by Jeedom to start plugin Daemon
@@ -162,7 +161,7 @@ class protexiom extends eqLogic {
       foreach (eqLogic::byType(__CLASS__) as $protexiom) {   		
         $protexiom->log('debug', 'Logging off during daemon_stop');
         $protexiom->initSpBrowser();
-        if (($protexiom->_spBrowser->authCookie)){//not Empty authCookie means logged in
+        if (($protexiom->_spBrowser->authCookie)) { // not Empty authCookie means logged in
           if(!$myError=$protexiom->_spBrowser->doLogout()) {
             $protexiom->log('debug', 'Successfull logout during daemon_stop');
             cache::byKey('somfyAuthCookie::'.$protexiom->getId())->remove();
@@ -1231,7 +1230,7 @@ class protexiom extends eqLogic {
         $this->batteryStatus($newValue);
         $statusUpdated++;
       }
-// $this->batteryStatus('10'); $statusUpdated++; // DEBUG_PILES
+// $this->batteryStatus('100'); $statusUpdated++; // DEBUG_PILES
         // To avoid stressing the protexiom, let's not get Elements details
         // when we know for sure they are unchanged.
       if($statusUpdated || $forceElementUpdate || $elementUpdateRequired) {
