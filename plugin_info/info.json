@@ -5,7 +5,7 @@
 "author" : "Fdp1",
 "installation" : "Aucune",
 "require" : "4.0",
-"version" : "2.0.0",
+"version" : "1.4.2",
 "category" : "security",
 "hasOwnDeamon" : true,
 "documentation" : "https://fdp1nm.github.io/plugin-protexiom/#language#/",
