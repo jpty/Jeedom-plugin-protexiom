@@ -50,7 +50,7 @@ function protexiomUpdateToVersion2() {
           if($cmd->getTemplate('dashboard') == 'protexiomDefault')
             $cmd->setTemplate('dashboard', 'protexiom::protexiomDefault');
           if($cmd->getTemplate('mobile') == 'protexiomDefault')
-            $cmd->setTemplate('mobile', '');
+            $cmd->setTemplate('mobile', 'protexiom::protexiomDefault');
           break;
         case 'zone_a':
         case 'zone_b':
@@ -539,7 +539,7 @@ function protexiom_update() {
 						$cmd->setDisplay('generic_type','SABOTAGE');
 						$cmd->setDisplay('invertBinary','1');
 						$cmd->save();
-						message::add('protexiom', 'Plugin Somfy alarme: Pour des raisons de compatibilité avec l\'appli mobile, l\'affichage des commandes tampered des détécteurs (sabotage) est maintenant inversé. Si vous utilisez des widgets personnalisés, vous devez les modifier en conséquence. Les valeurs récupérées dans les scénarios restent inchangées.', '', 'Protexiom');
+						message::add('protexiom', 'Plugin Somfy alarme: Pour des raisons de compatibilité avec l\'appli mobile, l\'affichage des commandes tampered des détecteurs (sabotage) est maintenant inversé. Si vous utilisez des widgets personnalisés, vous devez les modifier en conséquence. Les valeurs récupérées dans les scénarios restent inchangées.', '', 'Protexiom');
 						break;
 					case "alarm":
 						if($eqLogic->getConfiguration('item_type')=='typedm'){
