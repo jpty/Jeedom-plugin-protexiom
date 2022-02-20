@@ -36,6 +36,7 @@ function protexiom_install() {
 
 function protexiomUpdateTemplate($cmd,$newTemplate) {
   $tpl = $cmd->getTemplate('dashboard');
+  message::add('UpdateProtexiom',"$tpl ==> protexiom::$newTemplate");
   if($tpl == $newTemplate || $tpl == "core::$newTemplate")
     $cmd->setTemplate('dashboard', "protexiom::$newTemplate");
   $tpl = $cmd->getTemplate('mobile');
@@ -80,8 +81,8 @@ function protexiomUpdateToVersion2() {
           break;
         case 'gsm_link':
         case 'gsm_operator':
-          $cmd->setTemplate('dashboard', '');
-          $cmd->setTemplate('mobile', '');
+          $cmd->setTemplate('dashboard', 'default');
+          $cmd->setTemplate('mobile', 'default');
           break;
         case 'gsm_signal':
           protexiomUpdateTemplate($cmd,'protexiomGsmSignal');
