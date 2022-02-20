@@ -34,6 +34,15 @@ function protexiom_install() {
 	}
 }
 
+function protexiomUpdateTemplate($cmd,$newTemplate) {
+  $tpl = $cmd->getTemplate('dashboard');
+  if($tpl == $newTemplate || $tpl == "core::$newTemplate")
+    $cmd->setTemplate('dashboard', "protexiom::$newTemplate");
+  $tpl = $cmd->getTemplate('mobile');
+  if($tpl == $newTemplate || $tpl == "core::$newTemplate")
+    $cmd->setTemplate('mobile', "protexiom::$newTemplate");
+}
+
 function protexiomUpdateToVersion2() {
   // update protexion templates name if unchanged since installation
 	foreach (eqLogic::byType('protexiom') as $eqLogic) {
@@ -47,67 +56,38 @@ function protexiomUpdateToVersion2() {
         case 'reset_alarm_err':
         case 'reset_battery_err':
         case 'reset_link_err':
-          if($cmd->getTemplate('dashboard') == 'protexiomDefault')
-            $cmd->setTemplate('dashboard', 'protexiom::protexiomDefault');
-          if($cmd->getTemplate('mobile') == 'protexiomDefault')
-            $cmd->setTemplate('mobile', 'protexiom::protexiomDefault');
+          protexiomUpdateTemplate($cmd,'protexiomDefault');
           break;
         case 'zone_a':
         case 'zone_b':
         case 'zone_c':
-          if($cmd->getTemplate('dashboard') == 'protexiomZone')
-            $cmd->setTemplate('dashboard', 'protexiom::protexiomZone');
-          if($cmd->getTemplate('mobile') == 'protexiomZone')
-            $cmd->setTemplate('mobile', 'protexiom::protexiomZone');
+          protexiomUpdateTemplate($cmd,'protexiomZone');
           break;
         case 'battery_status':
-          if($cmd->getTemplate('dashboard') == 'protexiomBattery')
-            $cmd->setTemplate('dashboard', 'protexiom::protexiomBattery');
-          if($cmd->getTemplate('mobile') == 'protexiomBattery')
-            $cmd->setTemplate('mobile', 'protexiom::protexiomBattery');
+          protexiomUpdateTemplate($cmd,'protexiomBattery');
           break;
         case 'link':
-          if($cmd->getTemplate('dashboard') == 'protexiomLink')
-            $cmd->setTemplate('dashboard', 'protexiom::protexiomLink');
-          if($cmd->getTemplate('mobile') == 'protexiomLink')
-            $cmd->setTemplate('mobile', 'protexiom::protexiomLink');
+          protexiomUpdateTemplate($cmd,'protexiomLink');
           break;
         case 'door':
-          if($cmd->getTemplate('dashboard') == 'protexiomDoor')
-            $cmd->setTemplate('dashboard', 'protexiom::protexiomDoor');
-          if($cmd->getTemplate('mobile') == 'protexiomDoor')
-            $cmd->setTemplate('mobile', 'protexiom::protexiomDoor');
+          protexiomUpdateTemplate($cmd,'protexiomDoor');
           break;
         case 'alarm':
-          if($cmd->getTemplate('dashboard') == 'protexiomAlarm')
-            $cmd->setTemplate('dashboard', 'protexiom::protexiomAlarm');
-          if($cmd->getTemplate('mobile') == 'protexiomAlarm')
-            $cmd->setTemplate('mobile', 'protexiom::protexiomAlarm');
+          protexiomUpdateTemplate($cmd,'protexiomAlarm');
           break;
         case 'tampered':
-          if($cmd->getTemplate('dashboard') == 'protexiomTampered')
-            $cmd->setTemplate('dashboard', 'protexiom::protexiomTampered');
-          if($cmd->getTemplate('mobile') == 'protexiomTampered')
-            $cmd->setTemplate('mobile', 'protexiom::protexiomTampered');
+          protexiomUpdateTemplate($cmd,'protexiomTampered');
           break;
         case 'gsm_link':
         case 'gsm_operator':
-          if($cmd->getTemplate('dashboard') == 'protexiomDefault')
-            $cmd->setTemplate('dashboard', '');
-          if($cmd->getTemplate('mobile') == 'protexiomDefault')
-            $cmd->setTemplate('mobile', '');
+          $cmd->setTemplate('dashboard', '');
+          $cmd->setTemplate('mobile', '');
           break;
         case 'gsm_signal':
-          if($cmd->getTemplate('dashboard') == 'protexiomGsmSignal')
-            $cmd->setTemplate('dashboard', 'protexiom::protexiomGsmSignal');
-          if($cmd->getTemplate('mobile') == 'protexiomGsmSignal')
-            $cmd->setTemplate('mobile', 'protexiom::protexiomGsmSignal');
+          protexiomUpdateTemplate($cmd,'protexiomGsmSignal');
           break;
         case 'camera':
-          if($cmd->getTemplate('dashboard') == 'protexiomCamera')
-            $cmd->setTemplate('dashboard', 'protexiom::protexiomCamera');
-          if($cmd->getTemplate('mobile') == 'protexiomCamera')
-            $cmd->setTemplate('mobile', 'protexiom::protexiomCamera');
+          protexiomUpdateTemplate($cmd,'protexiomCamera');
           break;
     
       }
@@ -118,47 +98,26 @@ function protexiomUpdateToVersion2() {
 		foreach ($eqLogic->getCmd() as $cmd) {
       switch($cmd->getName()) {
         case 'pause':
-          if($cmd->getTemplate('dashboard') == 'protexiomElmtPause')
-            $cmd->setTemplate('dashboard', 'protexiom::protexiomElmtPause');
-          if($cmd->getTemplate('mobile') == 'protexiomElmtPause')
-            $cmd->setTemplate('mobile', 'protexiom::protexiomElmtPause');
+          protexiomUpdateTemplate($cmd,'protexiomElmtPause');
           break;
         case 'battery':
-          if($cmd->getTemplate('dashboard') == 'protexiomElmtBattery')
-            $cmd->setTemplate('dashboard', 'protexiom::protexiomElmtBattery');
-          if($cmd->getTemplate('mobile') == 'protexiomElmtBattery')
-            $cmd->setTemplate('mobile', 'protexiom::protexiomElmtBattery');
+          protexiomUpdateTemplate($cmd,'protexiomElmtBattery');
           break;
         case 'tampered':
-          if($cmd->getTemplate('dashboard') == 'protexiomElmtTampered')
-            $cmd->setTemplate('dashboard', 'protexiom::protexiomElmtTampered');
-          if($cmd->getTemplate('mobile') == 'protexiomElmtTampered')
-            $cmd->setTemplate('mobile', 'protexiom::protexiomElmtTampered');
+          protexiomUpdateTemplate($cmd,'protexiomElmtTampered');
           break;
         case 'alarm':
-          if($cmd->getTemplate('dashboard') == 'protexiomAlarm')
-            $cmd->setTemplate('dashboard', 'protexiom::protexiomAlarm');
-          if($cmd->getTemplate('mobile') == 'protexiomAlarm')
-            $cmd->setTemplate('mobile', 'protexiom::protexiomAlarm');
+          protexiomUpdateTemplate($cmd,'protexiomAlarm');
           break;
         case 'link':
-          if($cmd->getTemplate('dashboard') == 'protexiomElmtLink')
-            $cmd->setTemplate('dashboard', 'protexiom::protexiomElmtLink');
-          if($cmd->getTemplate('mobile') == 'protexiomElmtLink')
-            $cmd->setTemplate('mobile', 'protexiom::protexiomElmtLink');
+          protexiomUpdateTemplate($cmd,'protexiomElmtLink');
           break;
         case 'door':
           if($eqLogic->getConfiguration('item_type')=='typedogarage') {
-            if($cmd->getTemplate('dashboard') == 'protexiomElmtGarage')
-              $cmd->setTemplate('dashboard', 'protexiom::protexiomElmtGarage');
-            if($cmd->getTemplate('mobile') == 'protexiomElmtGarage')
-              $cmd->setTemplate('mobile', 'protexiom::protexiomElmtGarage');
+            protexiomUpdateTemplate($cmd,'protexiomElmtGarage');
           }
           else {
-            if($cmd->getTemplate('dashboard') == 'protexiomElmtDoor')
-              $cmd->setTemplate('dashboard', 'protexiom::protexiomElmtDoor');
-            if($cmd->getTemplate('mobile') == 'protexiomElmtDoor')
-              $cmd->setTemplate('mobile', 'protexiom::protexiomElmtDoor');
+            protexiomUpdateTemplate($cmd,'protexiomElmtDoor');
           }
           break;
       }
