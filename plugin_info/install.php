@@ -42,6 +42,7 @@ function protexiomUpdateTemplate($cmd,$newTemplate) {
   $tpl = $cmd->getTemplate('mobile');
   if($tpl == $newTemplate || $tpl == "core::$newTemplate")
     $cmd->setTemplate('mobile', "protexiom::$newTemplate");
+  $cmd->save();
 }
 
 function protexiomUpdateToVersion2() {
