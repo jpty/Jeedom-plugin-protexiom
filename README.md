@@ -8,9 +8,10 @@ Reprise du plugin protexiom pour Jeedom v4.2
 - Paramétres équipement et commandes dans des onglets différents.
 - Ajout de la zone dans le titre des équipements.
 - Réduction des interrogations de la centrale pour obtenir le statut des éléments. (L'interrogation est faite uniquement si les valeurs de tampered, link, battery, pause changent ou si au moins une porte/fenêtre est ouverte)
+- MAJ des templates sur les commandes (ajout protexiom:: si inchangée)
 
 ## TODO
-- MAJ des templates sur les commandes (ajout protexiom:: si inchangée)
+
 - Templates des équipements sur mobile.
 - Suppression des classes protexiom_ctrl et protexiom_elmt
 - Suppression Protexiom non configurée impossible. Message: Adresse IP invalide
