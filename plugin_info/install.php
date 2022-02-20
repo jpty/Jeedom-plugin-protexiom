@@ -36,13 +36,17 @@ function protexiom_install() {
 
 function protexiomUpdateTemplate($cmd,$newTemplate) {
   $tpl = $cmd->getTemplate('dashboard');
-  message::add('UpdateProtexiom',"$tpl ==> protexiom::$newTemplate");
-  if($tpl == $newTemplate || $tpl == "core::$newTemplate")
+  $modif = 0;
+  if($tpl == $newTemplate || $tpl == "core::$newTemplate") {
     $cmd->setTemplate('dashboard', "protexiom::$newTemplate");
+    $modif = 1;
+  }
   $tpl = $cmd->getTemplate('mobile');
-  if($tpl == $newTemplate || $tpl == "core::$newTemplate")
+  if($tpl == $newTemplate || $tpl == "core::$newTemplate") {
     $cmd->setTemplate('mobile', "protexiom::$newTemplate");
-  $cmd->save();
+    $modif = 1;
+  }
+  if($modif == 1) $cmd->save();
 }
 
 function protexiomUpdateToVersion2() {
