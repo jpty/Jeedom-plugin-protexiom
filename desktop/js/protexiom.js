@@ -97,9 +97,11 @@ function addCmdToTableProtexiom(_cmd) {
 	    tr += '<td>';
 	    tr += '<input class="cmdAttr form-control input-sm" data-l1key="name" style="width : 140px;" placeholder="{{Nom}}"><br>';
 	    tr += '</td>';
+      /*
 	    tr += '<td>'
 	    tr += '<input class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="mobileLabel" style="width : 140px;" placeholder="{{Légende widget mobile}}">';
 	    tr += '</td>'; 
+      */
 	    tr += '<td>';
 	    tr += '<span class="cmdAttr" data-l1key="type" ></span><br>';
 	    tr += '<span class="cmdAttr" data-l1key="subType" value="other"></span>';
